@@ -1,6 +1,13 @@
 import streamlit as st
 import bcrypt
 from datetime import datetime
+
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from utils import get_image_path
+
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
 #hide_sidebar = False
 st.hide_sidebar=True
@@ -133,7 +140,7 @@ def login():
 # Render the HTML in Streamlit
         st.markdown(html_content, unsafe_allow_html=True)
 
-        image_path = "images/mayfairjets1.jpg"
+        image_path = get_image_path("mayfairjets1.jpg")
 
 # Custom CSS to set the background and make the image take half the height
         st.markdown(

@@ -5,7 +5,11 @@ import os
 from datetime import datetime
 import numpy as np
 import bcrypt 
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from utils import get_image_path
 
 
 st.set_page_config(page_title='Home', page_icon="✈", layout="wide",initial_sidebar_state="collapsed")
@@ -110,7 +114,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-image_path = "images/mayfairjets1.jpg"
+image_path = get_image_path("mayfairjets1.jpg")
 
 # Custom CSS to set the background and make the image take half the height
 st.markdown(
