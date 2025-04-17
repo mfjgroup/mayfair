@@ -25,14 +25,14 @@ html_title = """
         }
     </style>
      <div class="container">
-     <center><h1 class="title-test"> 🛩 Revenue Test Management System 📊 </h1></center>
+     <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
      </html>
 """
 st.markdown(html_title, unsafe_allow_html=True)
 st.markdown("")
 # Predefined correct username and password (hashed)
-correct_username = "laila"
+correct_username = "mayfairjets"
 password = b"abcd1234"
 salt = bcrypt.gensalt(rounds=15)
 hashed_password = bcrypt.hashpw(password, salt)
