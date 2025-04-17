@@ -3,3 +3,9 @@ backgroundColor = "#FFF5EE"  # Set background color using hex code  FFF5EE
 
 [client]
 showSidebarNavigation = false
+
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+port = 8080
