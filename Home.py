@@ -25,7 +25,7 @@ html_title = """
         }
     </style>
      <div class="container">
-     <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
+     <center><h1 class="title-test"> 🛩 MFJ Revenue Management System📊 </h1></center>
      </div>
      </html>
 """
