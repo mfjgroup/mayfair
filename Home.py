@@ -1,4 +1,5 @@
 import streamlit as st
+<<<<<<< HEAD
 import bcrypt
 from datetime import datetime
 
@@ -11,6 +12,17 @@ from utils import get_image_path
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
 #hide_sidebar = False
 st.hide_sidebar=True
+=======
+import streamlit.components.v1 as components
+import pandas as pd
+import os
+from datetime import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+import streamlit_authenticator as stauth
+ 
+st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="collapsed")
+>>>>>>> 6790240 (changed)
 #st.sidebar.image("images/logo.jpg",caption="")
 html_title = """
     <html>
@@ -25,11 +37,16 @@ html_title = """
         }
     </style>
      <div class="container">
+<<<<<<< HEAD
      <center><h1 class="title-test"> 🛩 MFJ Revenue Management System📊 </h1></center>
+=======
+     <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
+>>>>>>> 6790240 (changed)
      </div>
      </html>
 """
 st.markdown(html_title, unsafe_allow_html=True)
+<<<<<<< HEAD
 st.markdown("")
 # Predefined correct username and password (hashed)
 correct_username = "mayfairjets"
@@ -87,6 +104,55 @@ def login():
         date_now = now.strftime("%d-%b-%y %H:%M:%S")
         st.markdown('<span style="color:#800080;font-weight:bold">Time is ' + date_now + '</span>', unsafe_allow_html=True)
         html_content = """
+=======
+############################
+
+#username = 'Polly1220'
+
+#password = 'Bob'
+
+#userInput = input("What is your username?\n")
+
+
+#if userInput == username:
+ #   a=input("Password?\n")   
+  #  if a == password:
+   #     print("Welcome!")
+   # else:
+    #    print("That is the wrong password.")
+#else:
+ #   print("That is the wrong username.")
+#####################
+st.markdown("")
+st.markdown(
+    """
+    <html>
+    <body>
+    <style>
+    .time-container {
+        color:#FFFFFF;
+        font-weight:bold; 
+        padding:5px;
+        border-radius:6px
+    }
+    </style>
+    </html>
+    """,
+    unsafe_allow_html=True
+)
+
+now=datetime.now()
+date_now=now.strftime("%d-%b-%y %H:%M:%S")
+#
+st.markdown('<span style="color:#800080;font-weight:bold">Time is '+ date_now +  '</span>', unsafe_allow_html=True)
+    #st.success(f"File saved at {file_path}")
+    #st.write(f"File Name: {uploaded_file.name}")
+    #<li><a href="Home" class="active">Home</a></li>
+
+st.markdown("")
+
+html_content = """
+>>>>>>> 6790240 (changed)
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -128,9 +194,20 @@ def login():
     <body>
     <ul>
       <div class="w3-container w3-center w3-animate-top">
+<<<<<<< HEAD
       <li class="w3-large"><a href="Homet"><i class="fa fa-homet"></i> Revenue & Inventory Report</a></li>
       <li class="w3-large"><a href="PRL"><i class="fa fa-homet"></i> Flown & No-Show Data</a></li>
       <li class="w3-large"><a href="Statistic"><i class="fa fa-homet"></i>Booking Statistics</a></li>
+=======
+      <li class="w3-large"><a href="Home"><i class="fa fa-home"></i> Home</a></li>
+      <li class="w3-large"><a href="Inventory">Inventory</a></li>
+      <li class="w3-large"><a href="Revenue">Revenue</a></li>
+      <li class="w3-large"><a href="Transaction">Transaction</a></li>
+      <li class="w3-large"><a href="Payment">Payment</a></li>
+      <li class="w3-large"><a href="Report">MM_DD</a></li>
+      <li class="w3-large"><a href="DaysPrior">Days Prior</a></li>
+      <li class="w3-large"><a href="BookingTrend">Booking Trend Prior</a></li>
+>>>>>>> 6790240 (changed)
       </div>
     </ul>
   </body>
@@ -138,12 +215,21 @@ def login():
 """
  #<li class="w3-large"><a href="MyPivot">MyPivot</a></li>
 # Render the HTML in Streamlit
+<<<<<<< HEAD
         st.markdown(html_content, unsafe_allow_html=True)
 
         image_path = get_image_path("mayfairjets1.jpg")
 
 # Custom CSS to set the background and make the image take half the height
         st.markdown(
+=======
+st.markdown(html_content, unsafe_allow_html=True)
+
+image_path = "images/mayfairjets1.jpg"
+
+# Custom CSS to set the background and make the image take half the height
+st.markdown(
+>>>>>>> 6790240 (changed)
     """
     <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,6 +248,7 @@ def login():
     """,
     unsafe_allow_html=True
 )
+<<<<<<< HEAD
         st.markdown(
     """
     <style>
@@ -193,3 +280,11 @@ def login():
                 st.error("Username is incorrect")
 
 login()
+=======
+
+# Create a container to display the image
+st.markdown('<div class="image-container">', unsafe_allow_html=True)
+st.image(image_path)
+st.markdown('</div>', unsafe_allow_html=True)
+########################################################
+>>>>>>> 6790240 (changed)
