@@ -3,10 +3,17 @@ import streamlit as st
 import plotly.express as px
 #from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
+<<<<<<< HEAD
 
 
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Inventory', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+=======
+import os 
+
+# Set up Streamlit page configuration
+st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+>>>>>>> 6790240 (changed)
 
 html_title = """
     <style>
@@ -20,12 +27,20 @@ html_title = """
         }
     </style>
      <div class="container"
+<<<<<<< HEAD
      <center><h1 class="title-test">🛩 Inventory Summary </h1></center>
+=======
+     <center><h1 class="title-test">🛩 Inventory Sumarry </h1></center>
+>>>>>>> 6790240 (changed)
      </div>
 """
 st.markdown(html_title, unsafe_allow_html=True)
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6790240 (changed)
 df = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Rotation Weeks')
 st.markdown("""
      <style>
@@ -44,7 +59,10 @@ st.markdown("""
 ##############
 st.markdown("")
 st.markdown("")
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6790240 (changed)
 st.markdown('<span style="color:#008080;font-weight:bold">Select Flight Date:</span>', unsafe_allow_html=True)
 col1,col2,col3=st.columns(3)
 with col1:
@@ -55,6 +73,7 @@ st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 ####################################
 all_option_sc = 'All'
+<<<<<<< HEAD
 shcd_1 = [all_option_sc] + list(dataset2["SCHED_ID"].unique())
 shcd_2 = st.sidebar.multiselect("SCHED_ID:", options=shcd_1)
 # If 'All' is selected, show all data; otherwise, filter based on selected sectors
@@ -125,6 +144,58 @@ if all_option_di in dir2 or len(dir2) == 0:  # If 'All' is selected or nothing i
 else:
     filtered_data = filtered_data[filtered_data["DIRECTION"].isin(dir2)]
 
+=======
+sched_id = [all_option_sc] + list(dataset2["SCHED_ID"].unique())  # 'All' added to the options
+sched_id2 = st.sidebar.selectbox("Sched_Id", options=sched_id)
+# Filter the data based on the selected route
+if sched_id2 == all_option_sc:
+    filtered_data = dataset2  # No filtering if 'All' is selected
+else:
+    filtered_data = dataset2[dataset2["SCHED_ID"] == sched_id2] #Filter based on selected route
+############
+all_option = 'All'
+routes = [all_option] + list(filtered_data["ROUTE"].unique())  # 'All' added to the options
+Rout = st.sidebar.selectbox("Route", options=routes)
+# Filter the data based on the selected route
+if Rout == all_option:
+    filtered_data = filtered_data  # No filtering if 'All' is selected
+else:
+    filtered_data = filtered_data[filtered_data["ROUTE"] == Rout] #Filter based on selected route
+############
+# Sector filter
+all_option_s='All'
+SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
+SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
+if SECTOR2 == all_option_s:
+    filtered_data = filtered_data  
+else:
+    filtered_data = filtered_data[filtered_data["SECTOR"] == SECTOR2] 
+############
+all_option_f='All'
+FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
+FLT_NO2= st.sidebar.selectbox("Flight No:", options=FLT_NO)
+if FLT_NO2 == all_option_f:
+    filtered_data = filtered_data  
+else:
+    filtered_data = filtered_data[filtered_data["FLT_NO"] == FLT_NO2] 
+###################
+all_option_d='All'
+DAY=[all_option_d]+list(filtered_data["DAY"].unique())
+DAY2= st.sidebar.selectbox("DAY No:", options=DAY)
+if DAY2 == all_option_d:
+    filtered_data = filtered_data  
+else:
+    filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
+##################
+#DIRECTION
+all_option_di='All'
+Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
+Direction2= st.sidebar.selectbox("Direction:", options=Direction)
+if Direction2 == all_option_di:
+    filtered_data = filtered_data  
+else:
+    filtered_data = filtered_data[filtered_data["DIRECTION"] == Direction2] 
+>>>>>>> 6790240 (changed)
 #######################
 y_capacity_T=filtered_data['Y_Capacity'].sum()
 seats_booked_t=filtered_data['Seats_Booked'].sum()
@@ -261,10 +332,14 @@ s_merge=s_merge.rename(columns={
 #st.dataframe(s_merge)
 #styled_s_merge=s_merge.style.applymap(highlight_lower_than_0,subset=['Avl_Seats_by_Cap','BookLoad%'])
 styled_s_merge = s_merge.style.map(highlight_lower_than_0, subset=['Avl_Seats_by_Cap']) \
+<<<<<<< HEAD
                           .map(highlight_100_per, subset=['BookLoad%'])
 
 
 
+=======
+                            .map(highlight_100_per, subset=['BookLoad%'])
+>>>>>>> 6790240 (changed)
 #styled_s_merge2=style_table_summer1(styled_s_merge)
 def style_table_summer1(df):
       return df.style.set_table_styles(
@@ -291,9 +366,21 @@ fig3 = go.Figure()
 # Add the first bar trace for Seats Booked
 st.subheader("Total Seats & BookLoad Per Dep Date")
 result1 = s_merge.groupby(by=s_merge["SECTOR"])[["Seats_Booked", "BookLoad%","Avl_Seats_by_Cap"]].sum().reset_index()
+<<<<<<< HEAD
 
 result1['totals']=(result1['Seats_Booked']+result1['Avl_Seats_by_Cap'])
 result1_sorted=result1.sort_values(by="Seats_Booked",ascending=False)
+=======
+result1['totals']=(result1['Seats_Booked']+result1['Avl_Seats_by_Cap'])
+result1_sorted=result1.sort_values(by="Seats_Booked",ascending=False)
+fig3.add_trace(go.Bar(
+    x=result1["SECTOR"], 
+    y=result1["Seats_Booked"], 
+    name="Seats Book", 
+    marker=dict(color='DarkGreen'),
+    offsetgroup=0  # Keeps the bars for this trace in the first group
+))
+>>>>>>> 6790240 (changed)
 
 # Add the second bar trace for Available Seats by Cap
 fig3.add_trace(go.Bar(
@@ -306,6 +393,7 @@ fig3.add_trace(go.Bar(
     offsetgroup=0  # Keeps the bars for this trace in the second group
 ))
 
+<<<<<<< HEAD
 fig3.add_trace(go.Bar(
     x=result1["SECTOR"], 
     y=result1["Seats_Booked"], 
@@ -316,6 +404,8 @@ fig3.add_trace(go.Bar(
 
 
 
+=======
+>>>>>>> 6790240 (changed)
 # Add the scatter plot for Book Load %
 fig3.add_trace(go.Scatter(
      x=result1["SECTOR"], 
@@ -351,7 +441,16 @@ st.plotly_chart(fig3, use_container_width=True)
 fig4=go.Figure()
 result2=filtered_data.groupby(by=filtered_data["ROUTE"])[["Seats_Booked","Avl_Seats_by_Cap"]].sum().reset_index()
 
+<<<<<<< HEAD
 
+=======
+fig4.add_trace(go.Bar(x=result2["ROUTE"],
+                      y=result2["Seats_Booked"],
+                      name="Seats_Booked",
+                      marker=dict(color='DarkBlue'),
+                      offsetgroup=0
+                      ))
+>>>>>>> 6790240 (changed)
 
 fig4.add_trace(go.Bar(
                       x=result2["ROUTE"],
@@ -361,6 +460,7 @@ fig4.add_trace(go.Bar(
                       offsetgroup=0
                      ))
 
+<<<<<<< HEAD
 fig4.add_trace(go.Bar(x=result2["ROUTE"],
                       y=result2["Seats_Booked"],
                       name="Seats_Booked",
@@ -368,6 +468,8 @@ fig4.add_trace(go.Bar(x=result2["ROUTE"],
                       offsetgroup=0
                       ))
 
+=======
+>>>>>>> 6790240 (changed)
 fig4.update_layout(
      barmode="group",  # This arranges the bars side by side
      template="gridon",
@@ -386,7 +488,25 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+<<<<<<< HEAD
 
+=======
+st.markdown("""
+    <style>
+        /* Adjust the width and height of the selectbox */
+        .stSelectbox {
+            width: 200px !important;    /* Set the width of the select box */
+            #height: 50px !important;    /* Set the height of the select box */
+            background-color: #800080;
+            padding: 5px;
+            border-radius: 10px
+        }
+        .stSelectbox>label {
+            color: #FFFAFA;  /* Change label color */
+        }
+    </style>
+""", unsafe_allow_html=True)
+>>>>>>> 6790240 (changed)
 st.markdown("""
     <style>
     span[data-baseweb="tag"] {

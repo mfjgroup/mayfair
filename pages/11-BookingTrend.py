@@ -1,11 +1,23 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+<<<<<<< HEAD
 import plotly.graph_objects as go
 import os 
 import numpy as np
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Booking Trend', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+=======
+from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import os 
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+# Set up Streamlit page configuration
+st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+>>>>>>> 6790240 (changed)
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
