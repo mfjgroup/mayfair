@@ -6,11 +6,9 @@ import plotly.graph_objects as go
 from datetime import datetime
 import os 
 # Set up Streamlit page configuration
-<<<<<<< HEAD
 st.set_page_config(page_title='Revenue', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-=======
+
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
->>>>>>> 6790240 (changed)
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
@@ -23,11 +21,9 @@ html_title = """
         }
     </style>
      <div class="container"
-<<<<<<< HEAD
      <center><h1 class="title-test">🛩 Revenue Summary  📊 </h1></center>
-=======
+
      <center><h1 class="title-test">🛩 Revenue Sumarry </h1></center>
->>>>>>> 6790240 (changed)
      </div>
 """
 st.markdown(html_title, unsafe_allow_html=True)
@@ -64,7 +60,7 @@ with col2:
 st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 ##########################
-<<<<<<< HEAD
+
 all_option_r = 'All'
 ROUTE1 = [all_option_r] + list(dataset2["ROUTE"].unique())
 
@@ -76,7 +72,7 @@ if all_option_r in ROUTE2 or len(ROUTE2) == 0:  # If 'All' is selected or nothin
     filtered_data = dataset2
 else:
     filtered_data = dataset2[dataset2["ROUTE"].isin(ROUTE2)]   
-=======
+
 all_option = 'All'
 routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
 Rout = st.sidebar.selectbox("Route", options=routes)
@@ -85,12 +81,10 @@ if Rout == all_option:
     filtered_data = dataset2  # No filtering if 'All' is selected
 else:
     filtered_data = dataset2[dataset2["ROUTE"] == Rout] #Filter based on selected route
->>>>>>> 6790240 (changed)
-############
+
 # Sector filter
 all_option_s='All'
 SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
-<<<<<<< HEAD
 SECTOR2= st.sidebar.multiselect("Sector:", options=SECTOR)
 
 if all_option_s in SECTOR2 or len(SECTOR2) == 0:  # If 'All' is selected or nothing is selected
@@ -98,7 +92,6 @@ if all_option_s in SECTOR2 or len(SECTOR2) == 0:  # If 'All' is selected or noth
 else:
     filtered_data = filtered_data[filtered_data["SECTOR"].isin(SECTOR2)] 
 
-############
 all_option_f='All'
 FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
 FLT_NO2= st.sidebar.multiselect("FLT_NO:", options=FLT_NO)
@@ -108,7 +101,6 @@ if all_option_f in FLT_NO2 or len(FLT_NO2) == 0:  # If 'All' is selected or noth
 else:
     filtered_data = filtered_data[filtered_data["FLT_NO"].isin(FLT_NO2)] 
 
-###################
 all_option_d='All'
 DAY=[all_option_d]+list(filtered_data["DAY"].unique())
 DAY2= st.sidebar.multiselect("DAY:", options=DAY)
@@ -118,7 +110,7 @@ if all_option_f in DAY2 or len(DAY2) == 0:  # If 'All' is selected or nothing is
 else:
     filtered_data = filtered_data[filtered_data["DAY"].isin(DAY2)] 
 
-=======
+
 SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
 if SECTOR2 == all_option_s:
     filtered_data = filtered_data  
@@ -140,7 +132,6 @@ if DAY2 == all_option_d:
     filtered_data = filtered_data  
 else:
     filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
->>>>>>> 6790240 (changed)
 ####################
 dfn = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Plan Budget')
 start_end_char_cost = dfn.groupby(['SCHED_ID', 'START', 'END', 'ROUTING'], as_index=False)['Net Cost'].sum()
@@ -178,11 +169,11 @@ agg_data2['Balance']=agg_data2['Balance'].astype(int)
 
 
 agg_data2['Rev & Net Cost(%)']=agg_data2['Rev & Net Cost(%)'].fillna(0) 
-<<<<<<< HEAD
+
 agg_data2['Rev & Net Cost(%)']=agg_data2['Rev & Net Cost(%)'].round(0).astype(int)
-=======
+
 agg_data2['Rev & Net Cost(%)']=agg_data2['Rev & Net Cost(%)'].round(0)
->>>>>>> 6790240 (changed)
+
 #st.dataframe(agg_data2)
 def highlight_colors(val):
      color = 'color:red' if val < 0 else 'color:LimeGreen'
@@ -194,7 +185,6 @@ style_agg_data2=agg_data2.style.map(highlight_colors,subset=['Balance'])
 #style_agg_data2 = agg_data2.replace(['inf'], 0)
 #st.dataframe(style_agg_data2)
 
-#___________________________________________
 
 agg_data2 = agg_data2.rename(columns={
     "SCHED_ID": 'SCHED_ID',
@@ -290,11 +280,11 @@ with col1:
 with col2:
       st.markdown(f"""
         <div class="metric-card">
-<<<<<<< HEAD
+
             <div class="metric-label">Net Profit</div>
-=======
+
             <div class="metric-label">Total Balance</div>
->>>>>>> 6790240 (changed)
+
             <div class="metric-value">{t_balance2:,.0f}€</div>
         </div>
     """, unsafe_allow_html=True)

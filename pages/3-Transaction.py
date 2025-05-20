@@ -5,12 +5,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os 
 # Set up Streamlit page configuration
-<<<<<<< HEAD
+
 st.set_page_config(page_title='Transaction', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-=======
+
 import matplotlib.pyplot as plt
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
->>>>>>> 6790240 (changed)
 
 #####################
 # Custom HTML Title
@@ -84,7 +83,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 ###################
-<<<<<<< HEAD
 
 # Add an "All" option at the start
 
@@ -153,7 +151,7 @@ if all_option_j in JOUR2 or len(JOUR2)==0:
 else:
     filtered_data=filtered_data[filtered_data["JOURNEY"].isin(JOUR2)]
 
-=======
+
 all_option = 'All'
 routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
 Rout = st.sidebar.selectbox("Route", options=routes)
@@ -203,12 +201,10 @@ if JOURNEY2 == all_option_j:
     filtered_data = filtered_data  
 else:
     filtered_data = filtered_data[filtered_data["JOURNEY"] == JOURNEY2] 
->>>>>>> 6790240 (changed)
 ##################
 #DIRECTION
 all_option_di='All'
 Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
-<<<<<<< HEAD
 Direction2= st.sidebar.multiselect("Direction:", options=Direction)
 
 if all_option_di in Direction2 or len(Direction2)==0:
@@ -247,7 +243,6 @@ if all_option_c in cont2 or len(cont2)==0:
 else:
     filtered_data=filtered_data[filtered_data["CONTRIBUTOR"].isin(cont2)]
 
-=======
 Direction2= st.sidebar.selectbox("Direction:", options=Direction)
 if Direction2 == all_option_di:
     filtered_data = filtered_data  
@@ -277,7 +272,6 @@ if Status2 == all_option_co:
     filtered_data = filtered_data  
 else:
     filtered_data = filtered_data[filtered_data["CONTRIBUTOR"] == cont2] 
->>>>>>> 6790240 (changed)
 #######################
 col1,col2=st.columns(2)
  ######################

@@ -1,22 +1,19 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-<<<<<<< HEAD
+
 import plotly.graph_objects as go
 import numpy as np
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Payment', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-=======
 from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import os 
-import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
->>>>>>> 6790240 (changed)
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
@@ -73,7 +70,7 @@ df = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Booking_Data')  # Sp
 
 st.sidebar.markdown('<span style="color:Black">Please Filter Here: </span>', unsafe_allow_html=True)
 ##########################
-<<<<<<< HEAD
+
 # Filter the data based on the selected route
 all_option_r = 'All'
 ROUTE1 = [all_option_r] + list(df["ROUTE"].unique())
@@ -157,7 +154,6 @@ if all_option_co in cont2 or len(cont2) == 0:  # If 'All' is selected or nothing
     filtered_data = filtered_data
 else:
     filtered_data = filtered_data[filtered_data["CONTRIBUTOR"].isin(cont2)]
-=======
 all_option = 'All'
 routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
 Rout = st.sidebar.selectbox("Route", options=routes)
@@ -224,7 +220,6 @@ if Status2 == all_option_co:
     filtered_data = filtered_data  
 else:
     filtered_data = filtered_data[filtered_data["CONTRIBUTOR"] == cont2] 
->>>>>>> 6790240 (changed)
 #########pivote table 
 Req_Seat=filtered_data.groupby(['CONTRIBUTOR','CONTRACT_STATUS'], as_index=False)['REQUESTED_SEATS'].sum()
 seats_booked=filtered_data.groupby(['CONTRIBUTOR','CONTRACT_STATUS'], as_index=False)['SEATS_BOOKED'].sum()

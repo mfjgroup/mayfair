@@ -3,20 +3,13 @@ import streamlit as st
 import plotly.express as px
 #from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
-<<<<<<< HEAD
-=======
 import matplotlib.pyplot as plt
->>>>>>> 6790240 (changed)
 import os
 import numpy as np
 
 # Set up Streamlit page configuration
-<<<<<<< HEAD
 st.set_page_config(page_title='Report', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-=======
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
->>>>>>> 6790240 (changed)
-
 
 #####################
 # Custom HTML Title
@@ -88,7 +81,6 @@ f_merge_y=f_merge_y.drop(columns=['year_p'])
 f_merge_y['NET_REVENUE']=f_merge_y['NET_REVENUE'].apply(lambda x:f'{x:,}€')
 col1,col2=st.columns(2)
 with col1:
-<<<<<<< HEAD
      headers = {
     'selector': 'th.col_heading',
     'props': [('background-color', '#F0F8FF'), ('color', 'F0F8FF')]
@@ -106,9 +98,7 @@ with col1:
         
  )
      st.dataframe(tmp_year_style)
-=======
      st.dataframe(f_merge_y)
->>>>>>> 6790240 (changed)
 with col2:
         result3 = df.groupby(by=df["Year"])["NET_REVENUE"].sum().reset_index()
         fig3 = px.pie(result3, names="Year", values="NET_REVENUE",title="Chart")
