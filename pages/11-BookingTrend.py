@@ -6,14 +6,12 @@ import os
 import numpy as np
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Booking Trend', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import os 
 import numpy as np
 import matplotlib.pyplot as plt
 # Set up Streamlit page configuration
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }

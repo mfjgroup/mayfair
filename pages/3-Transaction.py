@@ -8,8 +8,6 @@ import os
 
 st.set_page_config(page_title='Transaction', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 
-import matplotlib.pyplot as plt
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 
 #####################
 # Custom HTML Title

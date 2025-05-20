@@ -9,7 +9,6 @@ import numpy as np
 
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Report', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 
 #####################
 # Custom HTML Title

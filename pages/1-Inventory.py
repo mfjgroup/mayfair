@@ -8,10 +8,10 @@ import plotly.graph_objects as go
 
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Inventory', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-import os 
+
 
 # Set up Streamlit page configuration
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+#st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 
 html_title = """
     <style>
