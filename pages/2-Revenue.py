@@ -21,8 +21,6 @@ html_title = """
     </style>
      <div class="container"
      <center><h1 class="title-test">🛩 Revenue Summary  📊 </h1></center>
-
-     <center><h1 class="title-test">🛩 Revenue Sumarry </h1></center>
      </div>
 """
 st.markdown(html_title, unsafe_allow_html=True)

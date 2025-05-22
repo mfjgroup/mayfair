@@ -26,7 +26,7 @@ st.markdown(html_title, unsafe_allow_html=True)
 st.markdown("")
 # Predefined correct username and password (hashed)
 correct_username = "mayfairjets"
-password = b"abcd1234"
+password = b"MFJ2025@rms"
 salt = bcrypt.gensalt(rounds=15)
 hashed_password = bcrypt.hashpw(password, salt)
 
