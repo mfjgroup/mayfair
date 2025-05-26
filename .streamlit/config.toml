@@ -10,4 +10,4 @@ enableCORS = false
 enableXsrfProtection = false
 port = 8080
 
-backgroundColor = "#FFF5EE"  # Set background color using hex code  FFF5EE
+#backgroundColor = "#FFF5EE"  # Set background color using hex code  FFF5EE
