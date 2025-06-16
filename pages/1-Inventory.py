@@ -25,10 +25,7 @@ html_title = """
         }
     </style>
      <div class="container"
-     <center><h1 class="title-test">🛩 Inventory Summary </h1></center>
-=======
-     <center><h1 class="title-test">🛩 Inventory Sumarry </h1></center>
->>>>>>> 6790240 (changed)
+     <center><h1 class="title-test">🛩 Inventory Summary. </h1></center>
      </div>
 """
 st.markdown(html_title, unsafe_allow_html=True)
