@@ -57,20 +57,42 @@ with col2:
 st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 ##########################
+all_option_fs = 'All'
+fs1 = [all_option_fs] + list(dataset2["FSCODE"].unique())
 
+# Use multiselect instead of selectbox to allow multiple selections
+fs2 = st.sidebar.multiselect("FSCODE:", options=fs1)
+
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_fs in fs2 or len(fs2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = dataset2
+else:
+    filtered_data = dataset2[dataset2["FSCODE"].isin(fs2)]   
+##################### 
+all_option_sc = 'All'
+sc1 = [all_option_sc] + list(filtered_data["SCHED_ID"].unique())
+
+# Use multiselect instead of selectbox to allow multiple selections
+sc2 = st.sidebar.multiselect("SCHED_ID:", options=sc1)
+
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_sc in sc2 or len(sc2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = filtered_data
+else:
+    filtered_data = filtered_data[filtered_data["SCHED_ID"].isin(sc2)]  
+##################### 
 all_option_r = 'All'
-ROUTE1 = [all_option_r] + list(dataset2["ROUTE"].unique())
+ROUTE1 = [all_option_r] + list(filtered_data["ROUTE"].unique())
 
 # Use multiselect instead of selectbox to allow multiple selections
 ROUTE2 = st.sidebar.multiselect("ROUTE:", options=ROUTE1)
 
 # If 'All' is selected, show all data; otherwise, filter based on selected sectors
 if all_option_r in ROUTE2 or len(ROUTE2) == 0:  # If 'All' is selected or nothing is selected
-    filtered_data = dataset2
+    filtered_data = filtered_data
 else:
-    filtered_data = dataset2[dataset2["ROUTE"].isin(ROUTE2)]   
-
-
+    filtered_data = filtered_data[filtered_data["ROUTE"].isin(ROUTE2)]   
+##################### 
 # Sector filter
 all_option_s='All'
 SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
@@ -92,7 +114,10 @@ else:
 
 ####################
 dfn = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Plan Budget')
-start_end_char_cost = dfn.groupby(['SCHED_ID', 'START', 'END', 'ROUTING'], as_index=False)['Net Cost'].sum()
+dfn['Start Date'] = dfn['START'].dt.strftime('%d %b %Y')
+dfn['End Date'] = dfn['END'].dt.strftime('%d %b %Y')
+
+start_end_char_cost = dfn.groupby(['SCHED_ID', 'Start Date', 'End Date', 'ROUTING'], as_index=False)['Net Cost'].sum()
 tax_dfn = filtered_data.groupby(['SCHED_ID'], as_index=False)["Total Taxes"].sum()
 NET_REVENUE = df.groupby(['SCHED_ID'], as_index=False)["NET_REVENUE"].sum()
 agg_data1 = pd.merge(start_end_char_cost, tax_dfn, on=['SCHED_ID'], how='inner')
