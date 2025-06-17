@@ -58,13 +58,13 @@ with col2:
 st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 #################################### 
-all_option_sc = 'All'
-shcd_1 = [all_option_sc] + list(dataset2["FSCODE"].unique())
-shcd_2 = st.sidebar.multiselect("FSCODE:", options=shcd_1)
-if all_option_sc in shcd_2 or len(shcd_2) == 0:  # If 'All' is selected or nothing is selected
+all_option_fs = 'All'
+fs1_1 = [all_option_fs] + list(dataset2["FSCODE"].unique())
+fs2 = st.sidebar.multiselect("FSCODE:", options=fs1_1)
+if all_option_fs in fs2 or len(fs2) == 0:  # If 'All' is selected or nothing is selected
     filtered_data = dataset2
 else:
-    filtered_data = dataset2[dataset2["FSCODE"].isin(shcd_2)]
+    filtered_data = dataset2[dataset2["FSCODE"].isin(fs2)]
 ####################################
 all_option_sc = 'All'
 shcd_1 = [all_option_sc] + list(filtered_data["SCHED_ID"].unique())
@@ -125,7 +125,30 @@ if all_option_d in day2 or len(day2) == 0:  # If 'All' is selected or nothing is
 else:
     filtered_data = filtered_data[filtered_data["DAY"].isin(day2)]
 ##################
+all_option_fer = 'All'
+fer1 = [all_option_fer] + list(filtered_data["Ferry_Live"].unique())
+ 
+# Use multiselect instead of selectbox to allow multiple selections
+fer2 = st.sidebar.multiselect("Ferry_Live:", options=fer1)
+
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_fer in fer2 or len(fer2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = filtered_data
+else:
+    filtered_data = filtered_data[filtered_data["Ferry_Live"].isin(fer2)]
 #######################
+all_option_dir = 'All'
+dir1 = [all_option_dir] + list(filtered_data["DIRECTION"].unique())
+ 
+# Use multiselect instead of selectbox to allow multiple selections
+dir2 = st.sidebar.multiselect("DIRECTION:", options=dir1)
+
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_dir in dir2 or len(dir2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = filtered_data
+else:
+    filtered_data = filtered_data[filtered_data["DIRECTION"].isin(dir2)]
+########################
 y_capacity_T=filtered_data['Y_Capacity'].sum()
 seats_booked_t=filtered_data['Seats_Booked'].sum()
 avl_seat_cap_t=filtered_data['Avl_Seats_by_Cap'].sum()
