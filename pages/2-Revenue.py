@@ -57,7 +57,16 @@ with col2:
 st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 ##########################
+
 all_option_fs = 'All'
+
+dataset2=dataset2[dataset2["SCHED_ID"].isin
+([
+'E25-02A','E25-02B','E25-03B','E25-04','E25-05A','E25-05B','E25-08','E25-09A','E25-09B','E25-10','S25-01','S25-02',
+'S25-03','S25-04','S25-06','S25-07','S25-08','S25-12','S25-13','S25-14','S25-15','S25-16','S25-17','S25-18',
+'S25-19','S25-20','S25-22','S25-23','S25-24','S25-26','S25-27'
+])]
+
 fs1 = [all_option_fs] + list(dataset2["FSCODE"].unique())
 
 # Use multiselect instead of selectbox to allow multiple selections
