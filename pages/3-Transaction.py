@@ -149,57 +149,6 @@ if all_option_j in JOUR2 or len(JOUR2)==0:
 else:
     filtered_data=filtered_data[filtered_data["JOURNEY"].isin(JOUR2)]
 
-
-all_option = 'All'
-routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
-Rout = st.sidebar.selectbox("Route", options=routes)
-# Filter the data based on the selected route
-if Rout == all_option:
-    filtered_data = dataset2  # No filtering if 'All' is selected
-else:
-    filtered_data = dataset2[dataset2["ROUTE"] == Rout] #Filter based on selected route
-############
-# Sector filter
-all_option_s='All'
-SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
-SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
-if SECTOR2 == all_option_s:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["SECTOR"] == SECTOR2] 
-############
-all_option_f='All'
-FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
-FLT_NO2= st.sidebar.selectbox("Flight No:", options=FLT_NO)
-if FLT_NO2 == all_option_f:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["FLT_NO"] == FLT_NO2] 
-###################
-all_option_d='All'
-DAY=[all_option_d]+list(filtered_data["DAY"].unique())
-DAY2= st.sidebar.selectbox("DAY No:", options=DAY)
-if DAY2 == all_option_d:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
-##################
-all_option_ct='All'
-CATEGORY=[all_option_ct]+list(filtered_data["CATEGORY"].unique())
-CATEGORY2= st.sidebar.selectbox("Category:", options=CATEGORY)
-if CATEGORY2 == all_option_ct:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["CATEGORY"] == CATEGORY2] 
-###################
-all_option_j='All'
-JOURNEY=[all_option_j]+list(filtered_data["JOURNEY"].unique())
-JOURNEY2= st.sidebar.selectbox("Journey:", options=JOURNEY)
-if JOURNEY2 == all_option_j:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["JOURNEY"] == JOURNEY2] 
-##################
 #DIRECTION
 all_option_di='All'
 Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
@@ -241,35 +190,6 @@ if all_option_c in cont2 or len(cont2)==0:
 else:
     filtered_data=filtered_data[filtered_data["CONTRIBUTOR"].isin(cont2)]
 
-Direction2= st.sidebar.selectbox("Direction:", options=Direction)
-if Direction2 == all_option_di:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DIRECTION"] == Direction2] 
-#######################
-all_option_b='All'
-BOOKING_STATUS=[all_option_b]+list(filtered_data["BOOKING_STATUS"].unique())
-BOOKING_STATUS2= st.sidebar.selectbox("BOOKING_STATUS:", options=BOOKING_STATUS)
-if BOOKING_STATUS2 == all_option_b:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["BOOKING_STATUS"] == BOOKING_STATUS2] 
-##################
-all_option_c='All'
-Status=[all_option_c]+list(filtered_data["CONTRACT_STATUS"].unique())
-Status2= st.sidebar.selectbox("CONTRACT_STATUS:", options=Status)
-if Status2 == all_option_c:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["CONTRACT_STATUS"] == Status2] 
-###contributor
-all_option_co='All'
-cont=[all_option_co]+list(filtered_data["CONTRIBUTOR"].unique())
-cont2= st.sidebar.selectbox("CONTRIBUTOR:", options=cont)
-if Status2 == all_option_co:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["CONTRIBUTOR"] == cont2] 
 #######################
 col1,col2=st.columns(2)
  ######################
