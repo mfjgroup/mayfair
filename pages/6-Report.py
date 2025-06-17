@@ -97,7 +97,7 @@ with col1:
         
  )
      st.dataframe(tmp_year_style)
-     st.dataframe(f_merge_y)
+
 with col2:
         result3 = df.groupby(by=df["Year"])["NET_REVENUE"].sum().reset_index()
         fig3 = px.pie(result3, names="Year", values="NET_REVENUE",title="Chart")

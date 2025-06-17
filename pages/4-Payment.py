@@ -5,7 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 # Set up Streamlit page configuration
-st.set_page_config(page_title='Payment', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
@@ -13,6 +12,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 # Set up Streamlit page configuration
+
+st.set_page_config(page_title='Payment', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
@@ -153,72 +155,7 @@ if all_option_co in cont2 or len(cont2) == 0:  # If 'All' is selected or nothing
     filtered_data = filtered_data
 else:
     filtered_data = filtered_data[filtered_data["CONTRIBUTOR"].isin(cont2)]
-all_option = 'All'
-routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
-Rout = st.sidebar.selectbox("Route", options=routes)
-# Filter the data based on the selected route
-if Rout == all_option:
-    filtered_data = df  # No filtering if 'All' is selected
-else:
-    filtered_data = df[df["ROUTE"] == Rout] #Filter based on selected route
-############
-# Sector filter
-all_option_s='All'
-SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
-SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
-if SECTOR2 == all_option_s:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["SECTOR"] == SECTOR2] 
-############
-all_option_f='All'
-FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
-FLT_NO2= st.sidebar.selectbox("Flight No:", options=FLT_NO)
-if FLT_NO2 == all_option_f:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["FLT_NO"] == FLT_NO2] 
-###################
-all_option_d='All'
-DAY=[all_option_d]+list(filtered_data["DAY"].unique())
-DAY2= st.sidebar.selectbox("DAY No:", options=DAY)
-if DAY2 == all_option_d:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
-##################
-#DIRECTION
-all_option_di='All'
-Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
-Direction2= st.sidebar.selectbox("Direction:", options=Direction)
-if Direction2 == all_option_di:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DIRECTION"] == Direction2] 
-#######################
-all_option_b='All'
-BOOKING_STATUS=[all_option_b]+list(filtered_data["BOOKING_STATUS"].unique())
-BOOKING_STATUS2= st.sidebar.selectbox("BOOKING_STATUS:", options=BOOKING_STATUS)
-if BOOKING_STATUS2 == all_option_b:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["BOOKING_STATUS"] == BOOKING_STATUS2] 
-##################
-all_option_c='All'
-Status=[all_option_c]+list(filtered_data["CONTRACT_STATUS"].unique())
-Status2= st.sidebar.selectbox("CONTRACT_STATUS:", options=Status)
-if Status2 == all_option_c:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["CONTRACT_STATUS"] == Status2] 
-###contributor
-all_option_co='All'
-cont=[all_option_co]+list(filtered_data["CONTRIBUTOR"].unique())
-cont2= st.sidebar.selectbox("CONTRIBUTOR:", options=cont)
-if Status2 == all_option_co:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["CONTRIBUTOR"] == cont2] 
+
 #########pivote table 
 Req_Seat=filtered_data.groupby(['CONTRIBUTOR','CONTRACT_STATUS'], as_index=False)['REQUESTED_SEATS'].sum()
 seats_booked=filtered_data.groupby(['CONTRIBUTOR','CONTRACT_STATUS'], as_index=False)['SEATS_BOOKED'].sum()
