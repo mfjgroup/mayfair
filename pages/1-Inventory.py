@@ -392,14 +392,14 @@ st.markdown("""
 st.markdown("""
     <style>
         /* Adjust the width and height of the selectbox */
-        .stSelectbox {
+        .stmultiSelectbox {
             width: 200px !important;    /* Set the width of the select box */
             #height: 50px !important;    /* Set the height of the select box */
             background-color: #800080;
             padding: 5px;
             border-radius: 10px
         }
-        .stSelectbox>label {
+        .stmultiSelectbox>label {
             color: #FFFAFA;  /* Change label color */
         }
     </style>
