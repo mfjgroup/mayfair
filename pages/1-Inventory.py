@@ -48,6 +48,19 @@ st.markdown("""
 ##############
 st.markdown("")
 st.markdown("")
+st.markdown("""
+    <style>
+        div[data-testid="stMultiselect"] {
+            width: 250px !important;
+            background-color: Purple !important;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        div[data-testid="stMultiselect"] label {
+            color: #FFFAFA !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 st.markdown('<span style="color:#008080;font-weight:bold">Select Flight Date:</span>', unsafe_allow_html=True)
 col1,col2,col3=st.columns(3)
@@ -264,11 +277,12 @@ def highlight_100_per(val2):
      return color2
 
 ###########
-y_capacity=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Y_Capacity'].sum()
-seats_booked=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Seats_Booked'].sum()
-avl_seat_cap=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Avl_Seats_by_Cap'].sum()
-f_merge=pd.merge(y_capacity,seats_booked,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'],how='inner')
-s_merge=pd.merge(f_merge,avl_seat_cap,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'],how='inner')
+filtered_data['Dep Date'] = filtered_data['DEP_DATE'].dt.strftime('%d %b %Y')
+y_capacity=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'], as_index=False)['Y_Capacity'].sum()
+seats_booked=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'], as_index=False)['Seats_Booked'].sum()
+avl_seat_cap=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'], as_index=False)['Avl_Seats_by_Cap'].sum()
+f_merge=pd.merge(y_capacity,seats_booked,on=['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'],how='inner')
+s_merge=pd.merge(f_merge,avl_seat_cap,on=['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'],how='inner')
 
 s_merge['BookLoadAll'] = (s_merge['Seats_Booked'] / s_merge['Y_Capacity'].replace(0, pd.NA)) * 100
 s_merge['BookLoadAll'] = s_merge['BookLoadAll'].fillna(0)  # Replace NaN with 0 if no booking
@@ -419,19 +433,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-st.markdown("""
-    <style>
-        div[data-testid="stMultiselect"] {
-            width: 250px !important;
-            background-color: Purple !important;
-            padding: 5px;
-            border-radius: 10px;
-        }
-        div[data-testid="stMultiselect"] label {
-            color: #FFFAFA !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+
 
 
 
