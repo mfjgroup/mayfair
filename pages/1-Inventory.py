@@ -59,13 +59,21 @@ st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 #################################### 
 all_option_sc = 'All'
-shcd_1 = [all_option_sc] + list(dataset2["SCHED_ID"].unique())
-shcd_2 = st.sidebar.multiselect("SCHED_ID:", options=shcd_1)
-# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+shcd_1 = [all_option_sc] + list(dataset2["FSCODE"].unique())
+shcd_2 = st.sidebar.multiselect("FSCODE:", options=shcd_1)
 if all_option_sc in shcd_2 or len(shcd_2) == 0:  # If 'All' is selected or nothing is selected
     filtered_data = dataset2
 else:
-    filtered_data = dataset2[dataset2["SCHED_ID"].isin(shcd_2)]
+    filtered_data = dataset2[dataset2["FSCODE"].isin(shcd_2)]
+####################################
+all_option_sc = 'All'
+shcd_1 = [all_option_sc] + list(filtered_data["SCHED_ID"].unique())
+shcd_2 = st.sidebar.multiselect("SCHED_ID:", options=shcd_1)
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_sc in shcd_2 or len(shcd_2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = filtered_data
+else:
+    filtered_data = filtered_data[filtered_data["SCHED_ID"].isin(shcd_2)]
 ############
 all_option_r = 'All'
 ROUTE1 = [all_option_r] + list(filtered_data["ROUTE"].unique())
@@ -89,7 +97,7 @@ sec2 = st.sidebar.multiselect("SECTOR:", options=sec1)
 # If 'All' is selected, show all data; otherwise, filter based on selected sectors
 if all_option_s in sec2 or len(sec2) == 0:  # If 'All' is selected or nothing is selected
     filtered_data = filtered_data
-else:
+else: 
     filtered_data = filtered_data[filtered_data["SECTOR"].isin(sec2)]
 ########################################
 all_option_f = 'All'
@@ -233,11 +241,11 @@ def highlight_100_per(val2):
      return color2
 
 ###########
-y_capacity=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE'], as_index=False)['Y_Capacity'].sum()
-seats_booked=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE'], as_index=False)['Seats_Booked'].sum()
-avl_seat_cap=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE'], as_index=False)['Avl_Seats_by_Cap'].sum()
-f_merge=pd.merge(y_capacity,seats_booked,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE'],how='inner')
-s_merge=pd.merge(f_merge,avl_seat_cap,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE'],how='inner')
+y_capacity=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Y_Capacity'].sum()
+seats_booked=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Seats_Booked'].sum()
+avl_seat_cap=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'], as_index=False)['Avl_Seats_by_Cap'].sum()
+f_merge=pd.merge(y_capacity,seats_booked,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'],how='inner')
+s_merge=pd.merge(f_merge,avl_seat_cap,on=['SCHED_ID','FLT_NO','SECTOR','DEP_DATE','Ferry_Live'],how='inner')
 
 s_merge['BookLoadAll'] = (s_merge['Seats_Booked'] / s_merge['Y_Capacity'].replace(0, pd.NA)) * 100
 s_merge['BookLoadAll'] = s_merge['BookLoadAll'].fillna(0)  # Replace NaN with 0 if no booking
