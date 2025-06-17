@@ -193,10 +193,10 @@ else:
 #######################
 col1,col2=st.columns(2)
  ######################
-seats_book=filtered_data.groupby(['CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'], as_index=False)['SEATS_BOOKED'].sum()
+seats_book=filtered_data.groupby(['DATE_BOOKED','CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'], as_index=False)['SEATS_BOOKED'].sum()
 #avg_fare=filtered_data.groupby(['CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'], as_index=False)['BASE_FARE'].mean()
-net_revenue=filtered_data.groupby(['CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'], as_index=False)['NET_REVENUE'].sum()
-f_merge=pd.merge(seats_book,net_revenue,on=['CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'],how='inner')
+net_revenue=filtered_data.groupby(['DATE_BOOKED','CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'], as_index=False)['NET_REVENUE'].sum()
+f_merge=pd.merge(seats_book,net_revenue,on=['DATE_BOOKED','CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'],how='inner')
 
 #s_merge=pd.merge(f_merge,net_revenue,on=['CONTRIBUTOR','JOURNEY','DIRECTION','FLT_NO','SECTOR','FLIGHT_DATE'],how='inner')
 
