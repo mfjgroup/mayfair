@@ -57,7 +57,7 @@ with col2:
      end_date = st.date_input(label="End Date")
 st.markdown("")
 dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
-####################################
+#################################### 
 all_option_sc = 'All'
 shcd_1 = [all_option_sc] + list(dataset2["SCHED_ID"].unique())
 shcd_2 = st.sidebar.multiselect("SCHED_ID:", options=shcd_1)
@@ -68,7 +68,7 @@ else:
     filtered_data = dataset2[dataset2["SCHED_ID"].isin(shcd_2)]
 ############
 all_option_r = 'All'
-ROUTE1 = [all_option_r] + list(dataset2["ROUTE"].unique())
+ROUTE1 = [all_option_r] + list(filtered_data["ROUTE"].unique())
 
 # Use multiselect instead of selectbox to allow multiple selections
 ROUTE2 = st.sidebar.multiselect("ROUTE:", options=ROUTE1)
@@ -81,7 +81,7 @@ else:
 ########################################
 # Sector filter
 all_option_s = 'All'
-sec1 = [all_option_s] + list(dataset2["SECTOR"].unique())
+sec1 = [all_option_s] + list(filtered_data["SECTOR"].unique())
  
 # Use multiselect instead of selectbox to allow multiple selections
 sec2 = st.sidebar.multiselect("SECTOR:", options=sec1)
@@ -93,7 +93,7 @@ else:
     filtered_data = filtered_data[filtered_data["SECTOR"].isin(sec2)]
 ########################################
 all_option_f = 'All'
-flt11 = [all_option_f] + list(dataset2["FLT_NO"].unique())
+flt11 = [all_option_f] + list(filtered_data["FLT_NO"].unique())
  
 # Use multiselect instead of selectbox to allow multiple selections
 flt22 = st.sidebar.multiselect("FLT_NO:", options=flt11)
@@ -106,7 +106,7 @@ else:
 
 ###################
 all_option_d = 'All'
-day1 = [all_option_d] + list(dataset2["DAY"].unique())
+day1 = [all_option_d] + list(filtered_data["DAY"].unique())
  
 # Use multiselect instead of selectbox to allow multiple selections
 day2 = st.sidebar.multiselect("DAY:", options=day1)
@@ -117,20 +117,6 @@ if all_option_d in day2 or len(day2) == 0:  # If 'All' is selected or nothing is
 else:
     filtered_data = filtered_data[filtered_data["DAY"].isin(day2)]
 ##################
-#DIRECTION
-all_option_di='All'
-dir1=[all_option_di]+list(filtered_data["DIRECTION"].unique())
-
-dir2 = st.sidebar.multiselect("DIRECTION:", options=dir1)
-
-
-all_option_di='All'
-Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
-Direction2= st.sidebar.selectbox("Direction:", options=Direction)
-if Direction2 == all_option_di:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DIRECTION"] == Direction2] 
 #######################
 y_capacity_T=filtered_data['Y_Capacity'].sum()
 seats_booked_t=filtered_data['Seats_Booked'].sum()
