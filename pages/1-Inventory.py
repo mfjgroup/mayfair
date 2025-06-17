@@ -123,55 +123,7 @@ dir1=[all_option_di]+list(filtered_data["DIRECTION"].unique())
 
 dir2 = st.sidebar.multiselect("DIRECTION:", options=dir1)
 
-# If 'All' is selected, show all data; otherwise, filter based on selected sectors
-if all_option_di in dir2 or len(dir2) == 0:  # If 'All' is selected or nothing is selected
-    filtered_data = filtered_data
-else:
-    filtered_data = filtered_data[filtered_data["DIRECTION"].isin(dir2)]
 
-sched_id = [all_option_sc] + list(dataset2["SCHED_ID"].unique())  # 'All' added to the options
-sched_id2 = st.sidebar.selectbox("Sched_Id", options=sched_id)
-# Filter the data based on the selected route
-if sched_id2 == all_option_sc:
-    filtered_data = dataset2  # No filtering if 'All' is selected
-else:
-    filtered_data = dataset2[dataset2["SCHED_ID"] == sched_id2] #Filter based on selected route
-############
-all_option = 'All'
-routes = [all_option] + list(filtered_data["ROUTE"].unique())  # 'All' added to the options
-Rout = st.sidebar.selectbox("Route", options=routes)
-# Filter the data based on the selected route
-if Rout == all_option:
-    filtered_data = filtered_data  # No filtering if 'All' is selected
-else:
-    filtered_data = filtered_data[filtered_data["ROUTE"] == Rout] #Filter based on selected route
-############
-# Sector filter
-all_option_s='All'
-SECTOR=[all_option_s]+list(filtered_data["SECTOR"].unique())
-SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
-if SECTOR2 == all_option_s:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["SECTOR"] == SECTOR2] 
-############
-all_option_f='All'
-FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
-FLT_NO2= st.sidebar.selectbox("Flight No:", options=FLT_NO)
-if FLT_NO2 == all_option_f:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["FLT_NO"] == FLT_NO2] 
-###################
-all_option_d='All'
-DAY=[all_option_d]+list(filtered_data["DAY"].unique())
-DAY2= st.sidebar.selectbox("DAY No:", options=DAY)
-if DAY2 == all_option_d:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
-##################
-#DIRECTION
 all_option_di='All'
 Direction=[all_option_di]+list(filtered_data["DIRECTION"].unique())
 Direction2= st.sidebar.selectbox("Direction:", options=Direction)
