@@ -70,14 +70,6 @@ if all_option_r in ROUTE2 or len(ROUTE2) == 0:  # If 'All' is selected or nothin
 else:
     filtered_data = dataset2[dataset2["ROUTE"].isin(ROUTE2)]   
 
-all_option = 'All'
-routes = [all_option] + list(df["ROUTE"].unique())  # 'All' added to the options
-Rout = st.sidebar.selectbox("Route", options=routes)
-# Filter the data based on the selected route
-if Rout == all_option:
-    filtered_data = dataset2  # No filtering if 'All' is selected
-else:
-    filtered_data = dataset2[dataset2["ROUTE"] == Rout] #Filter based on selected route
 
 # Sector filter
 all_option_s='All'
@@ -98,37 +90,6 @@ if all_option_f in FLT_NO2 or len(FLT_NO2) == 0:  # If 'All' is selected or noth
 else:
     filtered_data = filtered_data[filtered_data["FLT_NO"].isin(FLT_NO2)] 
 
-all_option_d='All'
-DAY=[all_option_d]+list(filtered_data["DAY"].unique())
-DAY2= st.sidebar.multiselect("DAY:", options=DAY)
-
-if all_option_f in DAY2 or len(DAY2) == 0:  # If 'All' is selected or nothing is selected
-    filtered_data = filtered_data
-else:
-    filtered_data = filtered_data[filtered_data["DAY"].isin(DAY2)] 
-
-
-SECTOR2= st.sidebar.selectbox("Sector:", options=SECTOR)
-if SECTOR2 == all_option_s:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["SECTOR"] == SECTOR2] 
-############
-all_option_f='All'
-FLT_NO=[all_option_f]+list(filtered_data["FLT_NO"].unique())
-FLT_NO2= st.sidebar.selectbox("Flight No:", options=FLT_NO)
-if FLT_NO2 == all_option_f:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["FLT_NO"] == FLT_NO2] 
-###################
-all_option_d='All'
-DAY=[all_option_d]+list(filtered_data["DAY"].unique())
-DAY2= st.sidebar.selectbox("DAY No:", options=DAY)
-if DAY2 == all_option_d:
-    filtered_data = filtered_data  
-else:
-    filtered_data = filtered_data[filtered_data["DAY"] == DAY2] 
 ####################
 dfn = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Plan Budget')
 start_end_char_cost = dfn.groupby(['SCHED_ID', 'START', 'END', 'ROUTING'], as_index=False)['Net Cost'].sum()
@@ -277,18 +238,8 @@ with col1:
 with col2:
       st.markdown(f"""
         <div class="metric-card">
-
             <div class="metric-label">Net Profit</div>
-
-            <div class="metric-label">Total Balance</div>
-
-            <div class="metric-value">{t_balance2:,.0f}€</div>
-        </div>
-    """, unsafe_allow_html=True)
-      st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">Total Net Revenue</div>
-            <div class="metric-value">{t_net_r:,.0f}€</div>
+            <div class="metric-value">{t_balance2:,.0f}%</div>
         </div>
     """, unsafe_allow_html=True)
 with col3:
