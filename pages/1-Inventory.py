@@ -48,7 +48,19 @@ st.markdown("""
 ##############
 st.markdown("")
 st.markdown("")
-
+st.markdown("""
+    <style>
+        div[data-testid="stMultiselect"] {
+            width: 250px !important;
+            background-color: #800080 !important;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        div[data-testid="stMultiselect"] label {
+            color: #FFFAFA !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 st.markdown('<span style="color:#008080;font-weight:bold">Select Flight Date:</span>', unsafe_allow_html=True)
 col1,col2,col3=st.columns(3)
 with col1:
@@ -389,21 +401,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-    <style>
-        /* Adjust the width and height of the selectbox */
-        .stmultiSelectbox {
-            width: 200px !important;    /* Set the width of the select box */
-            #height: 50px !important;    /* Set the height of the select box */
-            background-color: #800080;
-            padding: 5px;
-            border-radius: 10px
-        }
-        .stmultiSelectbox>label {
-            color: #FFFAFA;  /* Change label color */
-        }
-    </style>
-""", unsafe_allow_html=True)
+
+
 
 st.markdown("""
     <style>
