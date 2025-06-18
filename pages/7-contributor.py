@@ -210,7 +210,7 @@ if select == "Easter":
 # Apply styles to the DataFrame using .style
  tmp_pivot_style = (
     table_E.style
-        .set_table_styles([headers, index_style])  # Set header and index styles
+        #.set_table_styles([headers, index_style])  # Set header and index styles
         .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'},subset=pd.IndexSlice[:, table_E.columns[4]])  # Apply background and text color for the entire table
         .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap'])   
              )
