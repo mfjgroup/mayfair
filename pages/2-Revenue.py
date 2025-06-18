@@ -273,7 +273,7 @@ with col2:
       st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Net Profit</div>
-            <div class="metric-value">{t_balance2:,.0f}%</div>
+            <div class="metric-value">{t_balance2:,.0f}</div>
         </div>
     """, unsafe_allow_html=True)
 with col3:
