@@ -211,8 +211,9 @@ if select == "Easter":
  tmp_pivot_style = (
     table_E.style
         #.set_table_styles([headers, index_style])  # Set header and index styles
-        .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'},subset=pd.IndexSlice[:, table_E.columns[4]])  # Apply background and text color for the entire table
-        .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap'])   
+        .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'})  # Apply background and text color for the entire table
+        .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap']) 
+        .style.set_sticky(axis="index")  
              )
  #styled_pivot = table_E.style.set_properties(**{'font-weight': 'bold'}, subset=pd.IndexSlice[:, table_E.columns[0]])
  st.markdown("")
