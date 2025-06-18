@@ -208,22 +208,16 @@ if select == "Easter":
  table_E['Seats_Booked']=table_E['Seats_Booked'].astype(int).round() 
  table_E['Y_Capacity']=table_E['Y_Capacity'].astype(int).round() 
 # Apply styles to the DataFrame using .style
- tmp_pivot_style = (
-    table_E.style
-        #.set_table_styles([headers, index_style])  # Set header and index styles
-        .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'})  # Apply background and text color for the entire table
-        .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap'])   
-        #.set_sticky()
-             )
-
- #tmp_pivot_style=tmp_pivot_style.set_sticky()
-
-
-# Display the styled pivot table
- 
+ #tmp_pivot_style = (
+  #  table_E.style
+   #     #.set_table_styles([headers, index_style])  # Set header and index styles
+    #    .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'})  # Apply background and text color for the entire table
+     #   .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap'])   
+      #       )
+ styled_pivot = table_E.style.set_properties(**{'font-weight': 'bold'}, subset=pd.IndexSlice[:, table_E.columns[0]])
  st.markdown("")
  st.markdown("")
- st.dataframe(tmp_pivot_style)    
+ st.dataframe(styled_pivot)    
  
  #st.dataframe(grandtotal)                  
 st.markdown("""
