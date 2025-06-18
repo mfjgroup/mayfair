@@ -207,15 +207,16 @@ if select == "Easter":
  table_E['Seats_Booked']=table_E['Seats_Booked'].astype(int).round() 
  table_E['Y_Capacity']=table_E['Y_Capacity'].astype(int).round() 
 # Apply styles to the DataFrame using .style
+ table_E = table_E.set_index(table_E.index, append=True)
+ table_E = table_E.swaplevel(0, 1)
+ frozen_columns = table_E.loc[(slice(None), ['SEATS_BOOKED'])]
  tmp_pivot_style = (
-    table_E.style
+    frozen_columns.style
         #.set_table_styles([headers, index_style])  # Set header and index styles
         .set_properties(**{'background-color': '#ECE3FF', 'color': 'black'})  # Apply background and text color for the entire table
         .map(lambda val: 'background-color: #FD636B; color: white' if val < 0 else '', subset=pd.IndexSlice[:, 'Avl_Seats_by_Cap']) 
              )
- tmp_pivot_style = tmp_pivot_style.set_index(tmp_pivot_style.index, append=True)
- tmp_pivot_style = tmp_pivot_style.swaplevel(0, 1)
- frozen_columns = tmp_pivot_style.loc[(slice(None), ['SEATS_BOOKED'])]
+
  #styled_pivot = table_E.style.set_properties(**{'font-weight': 'bold'}, subset=pd.IndexSlice[:, table_E.columns[0]])
  st.markdown("")
  st.markdown("")
