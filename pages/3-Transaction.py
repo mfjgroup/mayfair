@@ -51,7 +51,6 @@ st.markdown("""
      """, unsafe_allow_html=True)
 ##############
 st.markdown("")
-#pd.set_option('display.max_colwidth', 1000)
 
 #pd.set_option('display.max_colwidth', None) 
 pd.set_option('display.width', 2000) 
