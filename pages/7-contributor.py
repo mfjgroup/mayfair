@@ -207,9 +207,7 @@ if select == "Easter":
  table_E['Seats_Booked']=table_E['Seats_Booked'].astype(int).round() 
  table_E['Y_Capacity']=table_E['Y_Capacity'].astype(int).round() 
 # Apply styles to the DataFrame using .style
- table_E = table_E.set_index(table_E.index, append=True)
- table_E = table_E.swaplevel(0, 1)
- table_E = table_E.loc[(slice(None), ['Avl_Seats_by_Cap'])]
+
  tmp_pivot_style = (
     table_E.style
         #.set_table_styles([headers, index_style])  # Set header and index styles
