@@ -209,7 +209,7 @@ if select == "Easter":
 # Apply styles to the DataFrame using .style
  table_E = table_E.set_index(table_E.index, append=True)
  table_E = table_E.swaplevel(0, 1)
- frozen_columns = table_E.loc[(slice(None), ['SEATS_BOOKED'])]
+ frozen_columns = table_E.loc[(slice(None), ['SCHED_ID'])]
  tmp_pivot_style = (
     frozen_columns.style
         #.set_table_styles([headers, index_style])  # Set header and index styles
