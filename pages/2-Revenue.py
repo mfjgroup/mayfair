@@ -55,7 +55,7 @@ with col2:
 # Filter the dataset based on the selected date range
  #st.error(f"You have chosen analytics from: {start_date} to {end_date}")
 st.markdown("")
-dataset2 = df[(df["FLIGHT_DATE"] >= pd.to_datetime(start_date)) & (df["FLIGHT_DATE"] <= pd.to_datetime(end_date))]
+dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
 ##########################
 
 all_option_fs = 'All'
