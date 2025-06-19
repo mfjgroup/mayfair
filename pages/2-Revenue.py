@@ -35,7 +35,8 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-df=pd.read_excel('020525_RMS_Raw_Data2.xlsx',sheet_name='Flight Rotation Weeks')
+df=pd.read_excel('020525_RMS_Raw_Data2.xlsx',sheet_name='LookUp')
+df['Date Booked'] = df['DATE_BOOKED'].dt.strftime('%d %b %Y')
 st.sidebar.markdown('<span style="color:Black">Filter: </span>', unsafe_allow_html=True)
 #st.sidebar.title("Please Filter Here")
 st.markdown("")
@@ -77,12 +78,25 @@ if all_option_fs in fs2 or len(fs2) == 0:  # If 'All' is selected or nothing is 
     filtered_data = dataset2
 else:
     filtered_data = dataset2[dataset2["FSCODE"].isin(fs2)]   
-##################### 
-all_option_sc = 'All'
-sc1 = [all_option_sc] + list(filtered_data["SCHED_ID"].unique())
+######################DATE_BOOKED Filitration
+
+all_option_bd = 'All'
+bd1 = [all_option_bd] + list(filtered_data["Date Booked"].unique())
 
 # Use multiselect instead of selectbox to allow multiple selections
-sc2 = st.sidebar.multiselect("SCHED_ID:", options=sc1)
+bd2 = st.sidebar.multiselect("Date Booked", options=bd1)
+
+# If 'All' is selected, show all data; otherwise, filter based on selected sectors
+if all_option_bd in bd2 or len(bd2) == 0:  # If 'All' is selected or nothing is selected
+    filtered_data = filtered_data
+else:
+    filtered_data = filtered_data[filtered_data["Date Booked"].isin(bd2)]  
+##################### 
+all_option_sc = 'All'
+sc1 = [all_option_sc] + list(filtered_data["DATE_BOOKED"].unique())
+
+# Use multiselect instead of selectbox to allow multiple selections
+sc2 = st.sidebar.multiselect("DATE_BOOKED", options=sc1)
 
 # If 'All' is selected, show all data; otherwise, filter based on selected sectors
 if all_option_sc in sc2 or len(sc2) == 0:  # If 'All' is selected or nothing is selected
