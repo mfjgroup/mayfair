@@ -218,7 +218,7 @@ if select == "Easter":
  #styled_pivot = table_E.style.set_properties(**{'font-weight': 'bold'}, subset=pd.IndexSlice[:, table_E.columns[0]])
  st.markdown("")
  st.markdown("")
- st.dataframe(tmp_pivot_style)    
+ st.dataframe(table_E)    
  
  #st.dataframe(grandtotal)                  
 st.markdown("""
