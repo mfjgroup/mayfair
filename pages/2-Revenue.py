@@ -56,7 +56,7 @@ with col2:
 # Filter the dataset based on the selected date range
  #st.error(f"You have chosen analytics from: {start_date} to {end_date}")
 st.markdown("")
-dataset2 = df[(df["DEP_DATE"] >= pd.to_datetime(start_date)) & (df["DEP_DATE"] <= pd.to_datetime(end_date))]
+dataset2 = df[(df["FLIGHT_DATE"] >= pd.to_datetime(start_date)) & (df["FLIGHT_DATE"] <= pd.to_datetime(end_date))]
 ##########################
 
 all_option_fs = 'All'
@@ -93,10 +93,10 @@ else:
     filtered_data = filtered_data[filtered_data["Date Booked"].isin(bd2)]  
 ##################### 
 all_option_sc = 'All'
-sc1 = [all_option_sc] + list(filtered_data["DATE_BOOKED"].unique())
+sc1 = [all_option_sc] + list(filtered_data["SCHED_ID"].unique())
 
 # Use multiselect instead of selectbox to allow multiple selections
-sc2 = st.sidebar.multiselect("DATE_BOOKED", options=sc1)
+sc2 = st.sidebar.multiselect("SCHED_ID", options=sc1)
 
 # If 'All' is selected, show all data; otherwise, filter based on selected sectors
 if all_option_sc in sc2 or len(sc2) == 0:  # If 'All' is selected or nothing is selected
