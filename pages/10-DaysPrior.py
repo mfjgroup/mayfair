@@ -234,5 +234,4 @@ st.markdown("""
             color: #FFFAFA;  /* Change label color */
         }
     </style>
-        </style>
 """, unsafe_allow_html=True)
