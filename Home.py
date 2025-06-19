@@ -121,9 +121,9 @@ def login():
     <body>
     <ul>
       <div class="w3-container w3-center w3-animate-top">
-      <li class="w3-large"><a href="Homet"><i class="fa fa-homet"></i> Revenue & Inventory Report</a></li>
-      <li class="w3-large"><a href="PRL"><i class="fa fa-homet"></i> Flown & No-Show Data</a></li>
-      <li class="w3-large"><a href="Statistic"><i class="fa fa-homet"></i>Booking Statistics</a></li>
+      <li class="w3-large"><a href="Homet"><i class="fa fa-homet" target="_self"></i> Revenue & Inventory Report</a></li>
+      <li class="w3-large"><a href="PRL"><i class="fa fa-homet" target="_self"></i> Flown & No-Show Data</a></li>
+      <li class="w3-large"><a href="Statistic"><i class="fa fa-homet" target="_self"></i>Booking Statistics</a></li>
       </div>
     </ul>
   </body>
