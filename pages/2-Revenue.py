@@ -141,10 +141,10 @@ dfn['Start Date'] = dfn['START'].dt.strftime('%d %b %Y')
 dfn['End Date'] = dfn['END'].dt.strftime('%d %b %Y')
 
 start_end_char_cost = dfn.groupby(['SCHED_ID', 'Start Date', 'End Date', 'ROUTING'], as_index=False)['Net Cost'].sum()
-tax_dfn = filtered_data.groupby(['SCHED_ID'], as_index=False)["Total Taxes"].sum()
+tax_dfn = dfn.groupby(['SCHED_ID'], as_index=False)["Total Taxes"].sum()
 NET_REVENUE = df.groupby(['SCHED_ID'], as_index=False)["NET_REVENUE"].sum()
 agg_data1 = pd.merge(start_end_char_cost, tax_dfn, on=['SCHED_ID'], how='inner')
-agg_data1['Total Net Cost']=agg_data1['Net Cost']+agg_data1['Total Taxes']
+agg_data1['Total Net Cost']=agg_data1['Net Cost']+agg_data1['Total_Taxes']
 #st.dataframe(agg_data1)
 agg_data2=pd.merge(agg_data1,NET_REVENUE,on=['SCHED_ID'],how='inner')
 #st.dataframe(agg_data2)
