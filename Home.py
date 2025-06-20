@@ -32,16 +32,7 @@ if st.button("Login"):
         if username == USERNAME and bcrypt.checkpw(password.encode(), HASHED_PASSWORD):
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-            st.rerun()
-        else:
-            st.error("❌ Invalid username or password.")
-st.stop()  # Stop here if not logged in
-# Already logged in
-st.success("✅ You are logged in.")
-if st.button("🔓 Logout"):
-    st.session_state.logged_in = False
-    st.rerun()
-html_title = """
+            html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
         .container {
@@ -56,14 +47,14 @@ html_title = """
      <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
 """
-st.markdown(html_title, unsafe_allow_html=True)
+            st.markdown(html_title, unsafe_allow_html=True)
 
     # Current time
-now = datetime.now()
-date_now = now.strftime("%d-%b-%y %H:%M:%S")
-st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
+            now = datetime.now()
+            date_now = now.strftime("%d-%b-%y %H:%M:%S")
+            st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
     # Navigation HTML
-html_content = """
+            html_content = """
 <html>
 <head>
 <style>
@@ -103,13 +94,23 @@ li a:hover:not(.active) {
 </body>
 </html>
 """
-st.markdown(html_content, unsafe_allow_html=True)
+            st.markdown(html_content, unsafe_allow_html=True)
 
 # Image
-image_path = "images/mayfairjets1.jpg"
-st.image(image_path, use_column_width=True)
+            image_path = "images/mayfairjets1.jpg"
+            st.image(image_path, use_column_width=True)
 
 
 
 
 
+
+            st.rerun()
+else:
+            st.error("❌ Invalid username or password.")
+st.stop()  # Stop here if not logged in
+# Already logged in
+st.success("✅ You are logged in.")
+if st.button("🔓 Logout"):
+    st.session_state.logged_in = False
+    st.rerun()
