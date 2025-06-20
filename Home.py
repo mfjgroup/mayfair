@@ -11,7 +11,11 @@ def dummy():
 dummy()
 # Page setup
 # Hide sidebar
-
+st.markdown("""
+    <style>
+        .stSidebar { display: none; }
+    </style>
+""", unsafe_allow_html=True)
 
 # Initialize session state variables
 if "logged_in" not in st.session_state:
@@ -31,7 +35,6 @@ if not st.session_state.logged_in:
             st.rerun()
         else:
             st.error("❌ Invalid username or password.")
-    st.stop()  # stop app if not logged in
 
 # ---------- LOGOUT ----------
 if st.button("🔓 Logout"):
