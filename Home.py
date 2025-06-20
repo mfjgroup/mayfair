@@ -30,7 +30,7 @@ if not st.session_state.logged_in:
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if username == 'mayfairjets' and HASHED_PASSWORD='MFJ2025@rms':
+        if username == "mayfairjets" and HASHED_PASSWORD=="MFJ2025@rms123456":
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
             st.rerun()
