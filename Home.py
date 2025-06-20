@@ -11,11 +11,7 @@ def dummy():
 dummy()
 # Page setup
 # Hide sidebar
-st.markdown("""
-    <style>
-        .stSidebar { display: none; }
-    </style>
-""", unsafe_allow_html=True)
+
 
 # Initialize session state variables
 if "logged_in" not in st.session_state:
