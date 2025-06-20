@@ -2,14 +2,14 @@ import streamlit as st
 import bcrypt
 from datetime import datetime
 import streamlit_authenticator as stauth
+
+
+st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
 @st.cache_data
 def dummy():
     return True
 dummy()
 # Page setup
-
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
-
 # Hide sidebar
 st.markdown("""
     <style>
