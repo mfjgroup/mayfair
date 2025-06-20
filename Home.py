@@ -23,17 +23,17 @@ if "logged_in" not in st.session_state:
 # ---------- HARDCODED USER + HASHED PASSWORD ----------
 
 # ---------- LOGIN FORM ----------
+# Show login form if not logged in
+
 if not st.session_state.logged_in:
     st.title("🛩 Revenue Management System Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if username == "mayfairjets" and password=="MFJ2025@rms123456":
+        if username == "mayfairjets" and password == "MFJ2025@rms123456":
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-            st.rerun()
-            st.success("✅ You are logged in.")
 
             now = datetime.now()
             st.markdown(f"<b style='color:#800080'>Time is {now.strftime('%d-%b-%y %H:%M:%S')}</b>", unsafe_allow_html=True)
