@@ -13,19 +13,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ---------------- LOGIN CHECK ----------------
-# Save login status in session
-
-
-# Page setup
-st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
-
-# Hide sidebar
-st.markdown("""
-    <style>
-        .stSidebar { display: none; }
-    </style>
-""", unsafe_allow_html=True)
 
 # ---------------- LOGIN CHECK ----------------
 
