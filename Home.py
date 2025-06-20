@@ -13,13 +13,10 @@ st.markdown("""
         .stSidebar { display: none; }
     </style>
 """, unsafe_allow_html=True)
-
+# Initialize session state variables
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 # ---------- HARDCODED USER + HASHED PASSWORD ----------
-USERNAME = "mayfairjets"
-# Pre-generated bcrypt hash for "MFJ2025@rms"
-HASHED_PASSWORD = "MFJ2025@rms123456"  # <- Don't re-generate this!
-
-
 
 # ---------- LOGIN FORM ----------
 if not st.session_state.logged_in:
@@ -28,10 +25,10 @@ if not st.session_state.logged_in:
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if username == "mayfairjets" and HASHED_PASSWORD=="MFJ2025@rms123456":
+        if username == "mayfairjets" and password=="MFJ2025@rms123456":
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-            st.rerun()
+            st.experimental_rerun()
         else:
             st.error("❌ Invalid username or password.")
     st.stop()  # stop app if not logged in
