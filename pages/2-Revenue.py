@@ -7,7 +7,9 @@ from datetime import datetime
 import os 
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Revenue', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
-
+if 'logged_in' not in st.session_state or not st.session_state.logged_in:
+    st.error("Access denied. Please log in from the Home page.")
+    st.stop()
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
