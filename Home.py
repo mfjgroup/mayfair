@@ -13,6 +13,10 @@ st.markdown("""
         .stSidebar { display: none; }
     </style>
 """, unsafe_allow_html=True)
+@st.cache_data
+def dummy():
+    return True
+dummy()
 # Initialize session state variables
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
