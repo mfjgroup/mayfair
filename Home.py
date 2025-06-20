@@ -16,8 +16,23 @@ st.markdown("""
 # ---------------- LOGIN CHECK ----------------
 # Save login status in session
 
+
+# Page setup
+st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
+
+# Hide sidebar
+st.markdown("""
+    <style>
+        .stSidebar { display: none; }
+    </style>
+""", unsafe_allow_html=True)
+
+# ---------------- LOGIN CHECK ----------------
+
 USERNAME = "mayfairjets"
 PASSWORD = "MFJ2025@rms"
+
+# Generate the hash only once (you can save it as a constant in real apps)
 HASHED_PASSWORD = bcrypt.hashpw(PASSWORD.encode(), bcrypt.gensalt(rounds=12))
 
 if 'logged_in' not in st.session_state:
@@ -28,11 +43,28 @@ if not st.session_state.logged_in:
     st.title("🛩 Revenue Management System Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-if st.button("Login"):
+    
+    if st.button("Login"):
         if username == USERNAME and bcrypt.checkpw(password.encode(), HASHED_PASSWORD):
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-            html_title = """
+            st.rerun()
+        else:
+            st.error("❌ Invalid username or password.")
+    st.stop()  # Stop page execution if not logged in
+
+# ---------------- MAIN CONTENT ----------------
+
+# Already logged in
+st.success("✅ You are logged in.")
+
+# Logout
+if st.button("🔓 Logout"):
+    st.session_state.logged_in = False
+    st.rerun()
+
+# Header
+html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
         .container {
@@ -47,14 +79,15 @@ if st.button("Login"):
      <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
 """
-            st.markdown(html_title, unsafe_allow_html=True)
+st.markdown(html_title, unsafe_allow_html=True)
 
-    # Current time
-            now = datetime.now()
-            date_now = now.strftime("%d-%b-%y %H:%M:%S")
-            st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
-    # Navigation HTML
-            html_content = """
+# Current time
+now = datetime.now()
+date_now = now.strftime("%d-%b-%y %H:%M:%S")
+st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
+
+# Navigation
+html_content = """
 <html>
 <head>
 <style>
@@ -94,23 +127,8 @@ li a:hover:not(.active) {
 </body>
 </html>
 """
-            st.markdown(html_content, unsafe_allow_html=True)
+st.markdown(html_content, unsafe_allow_html=True)
 
 # Image
-            image_path = "images/mayfairjets1.jpg"
-            st.image(image_path, use_column_width=True)
-
-
-
-
-
-
-            st.rerun()
-else:
-            st.error("❌ Invalid username or password.")
-st.stop()  # Stop here if not logged in
-# Already logged in
-st.success("✅ You are logged in.")
-if st.button("🔓 Logout"):
-    st.session_state.logged_in = False
-    st.rerun()
+image_path = "images/mayfairjets1.jpg"
+st.image(image_path, use_column_width=True)
