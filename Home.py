@@ -17,7 +17,7 @@ st.markdown("""
 # ---------- HARDCODED USER + HASHED PASSWORD ----------
 USERNAME = "mayfairjets"
 # Pre-generated bcrypt hash for "MFJ2025@rms"
-HASHED_PASSWORD = b"$2b$12$Fsvt6evMvAxL4ZKPBZmYjuAjGbRrYuJfO3hlMNQtHcICxZSSGb/4e"  # <- Don't re-generate this!
+HASHED_PASSWORD = "MFJ2025@rms123456"  # <- Don't re-generate this!
 
 # --------- SESSION STATE LOGIN TRACKING ----------
 if 'logged_in' not in st.session_state:
