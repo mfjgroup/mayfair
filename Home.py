@@ -14,22 +14,34 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- LOGIN CHECK ----------------
+# Save login status in session
 
-names = ['Mayfair Admin']
-usernames = ['mayfairjets']
-passwords = ['MFJ2025@rms']
+USERNAME = "mayfairjets"
+PASSWORD = "MFJ2025@rms"
+HASHED_PASSWORD = bcrypt.hashpw(PASSWORD.encode(), bcrypt.gensalt(rounds=12))
 
-hashed_passwords = stauth.Hasher(passwords).generate()
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
 
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-                                    'rms_cookie', 'rms_app', cookie_expiry_days=1)
-
-name, auth_status, username = authenticator.login('Login', 'main')
-
-if auth_status:
-    st.session_state.logged_in = True
-    st.success(f"Welcome {name}")
-    html_title = """
+# Login form
+if not st.session_state.logged_in:
+    st.title("🛩 Revenue Management System Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+if st.button("Login"):
+        if username == USERNAME and bcrypt.checkpw(password.encode(), HASHED_PASSWORD):
+            st.session_state.logged_in = True
+            st.success("✅ Login successful.")
+            st.rerun()
+        else:
+            st.error("❌ Invalid username or password.")
+st.stop()  # Stop here if not logged in
+# Already logged in
+st.success("✅ You are logged in.")
+if st.button("🔓 Logout"):
+    st.session_state.logged_in = False
+    st.rerun()
+html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
         .container {
@@ -44,14 +56,14 @@ if auth_status:
      <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
 """
-    st.markdown(html_title, unsafe_allow_html=True)
+st.markdown(html_title, unsafe_allow_html=True)
 
     # Current time
-    now = datetime.now()
-    date_now = now.strftime("%d-%b-%y %H:%M:%S")
-    st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
+now = datetime.now()
+date_now = now.strftime("%d-%b-%y %H:%M:%S")
+st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
     # Navigation HTML
-    html_content = """
+html_content = """
 <html>
 <head>
 <style>
@@ -91,17 +103,11 @@ li a:hover:not(.active) {
 </body>
 </html>
 """
-    st.markdown(html_content, unsafe_allow_html=True)
+st.markdown(html_content, unsafe_allow_html=True)
 
 # Image
-    image_path = "images/mayfairjets1.jpg"
-    st.image(image_path, use_column_width=True)
-elif auth_status is False:
-    st.error('Username/password is incorrect')
-elif auth_status is None:
-    st.warning('Please enter your credentials')
-    st.stop()
-
+image_path = "images/mayfairjets1.jpg"
+st.image(image_path, use_column_width=True)
 
 
 
