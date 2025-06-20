@@ -1,6 +1,7 @@
 import streamlit as st
 import bcrypt
 from datetime import datetime
+import streamlit_authenticator as stauth
 
 # Page setup
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
@@ -14,45 +15,21 @@ st.markdown("""
 
 # ---------------- LOGIN CHECK ----------------
 
-# Store login status in session
-if 'logged_in' not in st.session_state:
-    st.session_state.logged_in = False
+names = ['Mayfair Admin']
+usernames = ['mayfairjets']
+passwords = ['MFJ2025@rms']
 
-# Hardcoded credentials (don't regenerate hash every time)
-correct_username = "mayfairjets"
-plain_password = "MFJ2025@rms"
+hashed_passwords = stauth.Hasher(passwords).generate()
 
-# Pre-generated hashed password
-# Use: bcrypt.hashpw(b"MFJ2025@rms", bcrypt.gensalt()) to generate this once, then paste result here
-hashed_password = b"$2b$12$39oRSv93E9oU.ZI/RZsM3u3XgQZJj4aIRqBBJXib.0gvq1yplUqJW"  # example only
-print(hashed_password)
+authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+                                    'rms_cookie', 'rms_app', cookie_expiry_days=1)
 
-# ---------------- LOGIN FORM ----------------
+name, auth_status, username = authenticator.login('Login', 'main')
 
-if not st.session_state.logged_in:
-    st.title("🛩 Revenue Management System Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password") 
-    if st.button("Login"):
-        if username == "mayfairjets" and password == "MFJ2025@rms":
-            st.session_state.logged_in = True
-            st.success("Login successful.")
-            st.rerun()
-        else:
-            st.error("Invalid username or password.")
-    st.stop()  # stop rendering rest of page if not logged in
-
-# ---------------- LOGOUT BUTTON ----------------
-with st.sidebar:
-    if st.button("🔓 Logout"):
-        st.session_state.logged_in = False
-        st.success("Logged out.")
-        st.rerun()
-
-# ---------------- MAIN APP ----------------
-
-# Header
-html_title = """
+if auth_status:
+    st.session_state.logged_in = True
+    st.success(f"Welcome {name}")
+    html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
         .container {
@@ -67,15 +44,14 @@ html_title = """
      <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
 """
-st.markdown(html_title, unsafe_allow_html=True)
+    st.markdown(html_title, unsafe_allow_html=True)
 
-# Current time
-now = datetime.now()
-date_now = now.strftime("%d-%b-%y %H:%M:%S")
-st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
-
-# Navigation HTML
-html_content = """
+    # Current time
+    now = datetime.now()
+    date_now = now.strftime("%d-%b-%y %H:%M:%S")
+    st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
+    # Navigation HTML
+    html_content = """
 <html>
 <head>
 <style>
@@ -115,8 +91,19 @@ li a:hover:not(.active) {
 </body>
 </html>
 """
-st.markdown(html_content, unsafe_allow_html=True)
+    st.markdown(html_content, unsafe_allow_html=True)
 
 # Image
-image_path = "images/mayfairjets1.jpg"
-st.image(image_path, use_column_width=True)
+    image_path = "images/mayfairjets1.jpg"
+    st.image(image_path, use_column_width=True)
+elif auth_status is False:
+    st.error('Username/password is incorrect')
+elif auth_status is None:
+    st.warning('Please enter your credentials')
+    st.stop()
+
+
+
+
+
+
