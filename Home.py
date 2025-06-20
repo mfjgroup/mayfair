@@ -33,21 +33,12 @@ if not st.session_state.logged_in:
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
             st.rerun()
-        else:
-            st.error("❌ Invalid username or password.")
+            st.success("✅ You are logged in.")
 
-# ---------- LOGOUT ----------
-if st.button("🔓 Logout"):
-    st.session_state.logged_in = False
-    st.rerun()
-
-# ---------- MAIN CONTENT ----------
-st.success("✅ You are logged in.")
-
-now = datetime.now()
-st.markdown(f"<b style='color:#800080'>Time is {now.strftime('%d-%b-%y %H:%M:%S')}</b>", unsafe_allow_html=True)
+            now = datetime.now()
+            st.markdown(f"<b style='color:#800080'>Time is {now.strftime('%d-%b-%y %H:%M:%S')}</b>", unsafe_allow_html=True)
 # Header
-html_title = """
+            html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
         .container {
@@ -62,15 +53,15 @@ html_title = """
      <center><h1 class="title-test"> 🛩 Revenue Management System 📊 </h1></center>
      </div>
 """
-st.markdown(html_title, unsafe_allow_html=True)
+            st.markdown(html_title, unsafe_allow_html=True)
 
 # Current time
-now = datetime.now()
-date_now = now.strftime("%d-%b-%y %H:%M:%S")
-st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
+            now = datetime.now()
+            date_now = now.strftime("%d-%b-%y %H:%M:%S")
+            st.markdown(f'<span style="color:#800080;font-weight:bold">Time is {date_now}</span>', unsafe_allow_html=True)
 
 # Navigation
-html_content = """
+            html_content = """
 <html>
 <head>
 <style>
@@ -110,8 +101,18 @@ li a:hover:not(.active) {
 </body>
 </html>
 """
-st.markdown(html_content, unsafe_allow_html=True)
+            st.markdown(html_content, unsafe_allow_html=True)
 
 # Image
-image_path = "images/mayfairjets1.jpg"
-st.image(image_path, use_column_width=True)
+            image_path = "images/mayfairjets1.jpg"
+            st.image(image_path, use_column_width=True)
+        else:
+            st.error("❌ Invalid username or password.")
+
+
+# ---------- LOGOUT ----------
+if st.button("🔓 Logout"):
+    st.session_state.logged_in = False
+    st.rerun()
+
+# ---------- MAIN CONTENT ----------
