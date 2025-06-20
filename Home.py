@@ -28,7 +28,7 @@ if not st.session_state.logged_in:
         if username == "mayfairjets" and password=="MFJ2025@rms123456":
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("❌ Invalid username or password.")
     st.stop()  # stop app if not logged in
