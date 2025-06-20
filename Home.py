@@ -1,10 +1,27 @@
-from streamlit_authenticator.utilities.hasher import Hasher
+import streamlit as st
 
-# Create a Hasher instance with a list of passwords
-hasher = Hasher(["MFJ2025@rms123456"])
+# Dummy credentials dictionary
+users = {
+    "alice": "password123",
+    "bob": "secure456"
+}
 
-# Call hash_list on the instance
-hashed_passwords = hasher.hash_list()
+def login(username, password):
+    return users.get(username) == password
 
-# Print the hashed password (you'll use this in your app)
-print(hashed_passwords[0])
+def main():
+    st.title("Login Page")
+
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if login(username, password):
+            st.success(f"Welcome, {username}!")
+            # Secure content goes here
+            st.write("This is your dashboard.")
+        else:
+            st.error("Invalid username or password.")
+
+if __name__ == "__main__":
+    main()
