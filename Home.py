@@ -4,6 +4,7 @@ from datetime import datetime
 import streamlit_authenticator as stauth
 
 # Page setup
+
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
 
 # Hide sidebar
@@ -13,43 +14,40 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
-# ---------------- LOGIN CHECK ----------------
-
+# ---------- HARDCODED USER + HASHED PASSWORD ----------
 USERNAME = "mayfairjets"
-PASSWORD = "MFJ2025@rms"
+# Pre-generated bcrypt hash for "MFJ2025@rms"
+HASHED_PASSWORD = b"$2b$12$Fsvt6evMvAxL4ZKPBZmYjuAjGbRrYuJfO3hlMNQtHcICxZSSGb/4e"  # <- Don't re-generate this!
 
-# Generate the hash only once (you can save it as a constant in real apps)
-HASHED_PASSWORD = bcrypt.hashpw(PASSWORD.encode(), bcrypt.gensalt(rounds=12))
-
+# --------- SESSION STATE LOGIN TRACKING ----------
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
-# Login form
+# ---------- LOGIN FORM ----------
 if not st.session_state.logged_in:
     st.title("🛩 Revenue Management System Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    
+
     if st.button("Login"):
-        if username == USERNAME and bcrypt.checkpw(password.encode(), HASHED_PASSWORD):
+        if username == 'mayfairjets' and HASHED_PASSWORD='MFJ2025@rms':
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
             st.rerun()
         else:
             st.error("❌ Invalid username or password.")
-    st.stop()  # Stop page execution if not logged in
+    st.stop()  # stop app if not logged in
 
-# ---------------- MAIN CONTENT ----------------
-
-# Already logged in
-st.success("✅ You are logged in.")
-
-# Logout
+# ---------- LOGOUT ----------
 if st.button("🔓 Logout"):
     st.session_state.logged_in = False
     st.rerun()
 
+# ---------- MAIN CONTENT ----------
+st.success("✅ You are logged in.")
+
+now = datetime.now()
+st.markdown(f"<b style='color:#800080'>Time is {now.strftime('%d-%b-%y %H:%M:%S')}</b>", unsafe_allow_html=True)
 # Header
 html_title = """
     <style>
