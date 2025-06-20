@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 st.set_page_config(page_title='Inventory', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 if 'logged_in' not in st.session_state or not st.session_state.logged_in:
     st.error("Access denied. Please log in from the Home page.")
-
+    st.stop() 
 # Set up Streamlit page configuration
 #st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 

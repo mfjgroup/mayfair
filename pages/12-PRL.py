@@ -14,6 +14,7 @@ from utils import get_image_path
 st.set_page_config(page_title='PRL', page_icon="✈", layout="wide",initial_sidebar_state="collapsed")
 if 'logged_in' not in st.session_state or not st.session_state.logged_in:
     st.error("Access denied. Please log in from the Home page.")
+    st.stop() 
 #hide_sidebar = False
 st.hide_sidebar=True
 #st.sidebar.image("images/logo.jpg",caption="")

@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import numpy as np
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Days Prior', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+
 from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
@@ -14,6 +15,7 @@ import matplotlib.pyplot as plt
 # Set up Streamlit page configuration
 if 'logged_in' not in st.session_state or not st.session_state.logged_in:
     st.error("Access denied. Please log in from the Home page.")
+    st.stop() 
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
