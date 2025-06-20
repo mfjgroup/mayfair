@@ -1,42 +1,31 @@
 import streamlit as st
+import streamlit_authenticator as stauth
 
-# Dummy credentials
-users = {
-    "alice": "password123",
-    "bob": "secure456"
-}
+# User credentials
+names = ["Alice", "Bob"]
+usernames = ["alice", "bob"]
+passwords = ["password123", "secure456"]
 
-def login(username, password):
-    return users.get(username) == password
+# Hashed passwords for security
+hashed_passwords = stauth.Hasher(passwords).generate()
 
-# Initialize session state
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-    st.session_state.username = ""
+# Create the authenticator object with cookie params
+authenticator = stauth.Authenticate(
+    names,
+    usernames,
+    hashed_passwords,
+    "some_cookie_name",  # cookie name (unique per app)
+    "some_signature_key",  # secret key for signing cookies (make this secret!)
+    cookie_expiry_days=30
+)
 
-def logout():
-    st.session_state.logged_in = False
-    st.session_state.username = ""
+name, authentication_status, username = authenticator.login("Login", "main")
 
-def main():
-    st.title("Login Demo with Session Persistence")
-
-    if not st.session_state.logged_in:
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
-
-        if st.button("Login"):
-            if login(username, password):
-                st.session_state.logged_in = True
-                st.session_state.username = username
-                st.success(f"Welcome, {username}!")
-            else:
-                st.error("Invalid credentials.")
-    else:
-        st.success(f"Already logged in as {st.session_state.username}")
-        if st.button("Logout"):
-            logout()
-        st.write("Your secure content goes here.")
-
-if __name__ == "__main__":
-    main()
+if authentication_status:
+    authenticator.logout("Logout", "sidebar")
+    st.write(f"Welcome *{name}*")
+    st.write("You are logged in")
+elif authentication_status is False:
+    st.error("Username/password is incorrect")
+else:
+    st.info("Please enter your username and password")
