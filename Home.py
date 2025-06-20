@@ -22,7 +22,6 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 # ---------- HARDCODED USER + HASHED PASSWORD ----------
 
-# ---------- LOGIN FORM ----------
 # Show login form if not logged in
 
 if not st.session_state.logged_in:
@@ -34,7 +33,7 @@ if not st.session_state.logged_in:
         if username == "mayfairjets" and password == "MFJ2025@rms123456":
             st.session_state.logged_in = True
             st.success("✅ Login successful.")
-
+            
             now = datetime.now()
             st.markdown(f"<b style='color:#800080'>Time is {now.strftime('%d-%b-%y %H:%M:%S')}</b>", unsafe_allow_html=True)
 # Header
@@ -102,13 +101,14 @@ li a:hover:not(.active) {
 </html>
 """
             st.markdown(html_content, unsafe_allow_html=True)
+         
 
 # Image
             image_path = "images/mayfairjets1.jpg"
             st.image(image_path, use_column_width=True)
         else:
             st.error("❌ Invalid username or password.")
-
+            st.rerun()
 
 # ---------- LOGOUT ----------
 if st.button("🔓 Logout"):
