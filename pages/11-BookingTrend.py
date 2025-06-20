@@ -6,6 +6,8 @@ import os
 import numpy as np
 # Set up Streamlit page configuration
 st.set_page_config(page_title='Booking Trend', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
+if 'logged_in' not in st.session_state or not st.session_state.logged_in:
+    st.error("Access denied. Please log in from the Home page.")
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import os 

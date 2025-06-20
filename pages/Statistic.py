@@ -13,6 +13,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils import get_image_path
 
 st.set_page_config(page_title='Statistic', page_icon="✈", layout="wide",initial_sidebar_state="collapsed")
+if 'logged_in' not in st.session_state or not st.session_state.logged_in:
+    st.error("Access denied. Please log in from the Home page.")
 #hide_sidebar = False
 st.hide_sidebar=True
 #st.sidebar.image("images/logo.jpg",caption="")
