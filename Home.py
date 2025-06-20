@@ -2,7 +2,10 @@ import streamlit as st
 import bcrypt
 from datetime import datetime
 import streamlit_authenticator as stauth
-
+@st.cache_data
+def dummy():
+    return True
+dummy()
 # Page setup
 
 st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide")
@@ -13,10 +16,7 @@ st.markdown("""
         .stSidebar { display: none; }
     </style>
 """, unsafe_allow_html=True)
-@st.cache_data
-def dummy():
-    return True
-dummy()
+
 # Initialize session state variables
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
