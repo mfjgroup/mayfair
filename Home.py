@@ -31,55 +31,14 @@ salt = bcrypt.gensalt(rounds=15)
 hashed_password = bcrypt.hashpw(password, salt)
 
 # Function to show the login page
-def login():
-    # Display login form with input fields
-    col1, col2, col3, col4, col5,col6 = st.columns(6)
-    with col1:
-        username_input = st.text_input("Username", "Enter User Name", key="placeholder")
-        password_input = st.text_input("Password", type="password")
-    
-    tabs_font_css = """
-    <style>
-    div[class*="stTextInput"] label {
-      font-size: 26px;
-      color: #800080;
-      width : 40 px;
-    }
-    div[class*="stNumberInput"] label {
-      font-size: 26px;
-      color: #800080;
-      width : 40 px;
-      border:1px solid #777;
-    }
-    </style>
-    """
-    
-    st.write(tabs_font_css, unsafe_allow_html=True)
-
-    if 'logged_in' not in st.session_state:
-        st.session_state.logged_in = False
-
-    # If already logged in, show the logout button and time
-    if st.session_state.logged_in:
-        logout_button = st.button("Logout")
-        if logout_button:
-            st.session_state.logged_in = False
-            st.rerun()  # Reset and re-render the page
-
-        st.markdown(
-            """
-            <style>
-            .stSidebar {display: block;}  /* Hides the sidebar completely */
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
 
         # Display current time for logged-in users
-        now = datetime.now()
-        date_now = now.strftime("%d-%b-%y %H:%M:%S")
-        st.markdown('<span style="color:#800080;font-weight:bold">Time is ' + date_now + '</span>', unsafe_allow_html=True)
-        html_content = """
+    now = datetime.now()
+    date_now = now.strftime("%d-%b-%y %H:%M:%S")
+    st.markdown('<span style="color:#800080;font-weight:bold">Time is ' + date_now + '</span>', unsafe_allow_html=True)
+    html_content = """
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -131,12 +90,12 @@ def login():
 """
  #<li class="w3-large"><a href="MyPivot">MyPivot</a></li>
 # Render the HTML in Streamlit
-        st.markdown(html_content, unsafe_allow_html=True)
+    st.markdown(html_content, unsafe_allow_html=True)
 
-        image_path = "images/mayfairjets1.jpg"
+    image_path = "images/mayfairjets1.jpg"
 
 # Custom CSS to set the background and make the image take half the height
-        st.markdown(
+    st.markdown(
     """
     <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -155,7 +114,7 @@ def login():
     """,
     unsafe_allow_html=True
 )
-        st.markdown(
+    st.markdown(
     """
     <style>
     .stSidebar {display: block;}  /* Hides the sidebar completely */
@@ -164,25 +123,21 @@ def login():
     unsafe_allow_html=True,
 )
 # Create a container to display the image
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        st.image(image_path)
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="image-container">', unsafe_allow_html=True)
+    st.image(image_path)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # Login process
-    else:
-        if st.button("Login"):
-            # Check if the entered username matches the correct username
-            if username_input == correct_username:
-                # Check if the entered password matches the stored hashed password
-                if bcrypt.checkpw(password_input.encode('utf-8'), hashed_password):
-                    # Set session state to indicate login success
-                    st.session_state.logged_in = True
-                    st.rerun()  # Re-render the page to reflect the logged-in state
-                    
 
-                else:
-                    st.error("Password is incorrect")
-            else:
-                st.error("Username is incorrect")
-
-login()
+if not st.session_state.logged_in:
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        if username == correct_username and bcrypt.checkpw(password.encode(), hashed_password):
+            st.session_state.logged_in = True
+            st.success("Login successful.")
+            st.rerun()
+        else:
+            st.error("Invalid credentials")
+else:
+    st.success("You are logged in.")
