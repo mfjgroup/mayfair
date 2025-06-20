@@ -21,18 +21,20 @@ if 'logged_in' not in st.session_state:
 # Hardcoded credentials (don't regenerate hash every time)
 correct_username = "mayfairjets"
 plain_password = "MFJ2025@rms"
+
 # Pre-generated hashed password
 # Use: bcrypt.hashpw(b"MFJ2025@rms", bcrypt.gensalt()) to generate this once, then paste result here
 hashed_password = b"$2b$12$39oRSv93E9oU.ZI/RZsM3u3XgQZJj4aIRqBBJXib.0gvq1yplUqJW"  # example only
+print(hashed_password)
 
 # ---------------- LOGIN FORM ----------------
 
 if not st.session_state.logged_in:
     st.title("🛩 Revenue Management System Login")
     username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    password = st.text_input("Password", type="password") 
     if st.button("Login"):
-        if username == correct_username and bcrypt.checkpw(password.encode(), hashed_password):
+        if username == "mayfairjets" and password == "MFJ2025@rms":
             st.session_state.logged_in = True
             st.success("Login successful.")
             st.rerun()
