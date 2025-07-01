@@ -72,7 +72,9 @@ else:
     st.markdown("")
     sheets= st.radio("Select Sheet",["Inventory","Transaction"])  
     if sheets=='Inventory':
-        st.markdown("""
+        col1,col2,col3,col4=st.columns(4)
+        with col1:
+         st.markdown("""
     <style>
         .metric-card {
             background-color: #008080;  
@@ -84,7 +86,7 @@ else:
      </style>
      """, unsafe_allow_html=True)
 
-        st.markdown(f"""
+         st.markdown(f"""
                 <div class="metric-card">
                   <div class="metric-label">Inventory Summary</div>
                 </div>
