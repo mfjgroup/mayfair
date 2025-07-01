@@ -59,7 +59,7 @@ else:
 
     # Header
     html_title = """
-    <div class="container" style="text-align:center; background-color:#800080; color:white; padding:5px; border-radius:20px;">
+    <div class="container" style="text-align:center; background-color:#800080; color:white; padding:2px; border-radius:10px;">
         <h1 style="margin:0;">🛩 Revenue and Inventory Report 📊</h1>
     </div>
     """
@@ -317,6 +317,7 @@ else:
           return color2
 
 ###########
+        filtered_data['DEP_DATE'] = pd.to_datetime(filtered_data['DEP_DATE'], errors='coerce')
         filtered_data['Dep Date'] = filtered_data['DEP_DATE'].dt.strftime('%d %b %Y')
         y_capacity=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'], as_index=False)['Y_Capacity'].sum()
         seats_booked=filtered_data.groupby(['SCHED_ID','FLT_NO','SECTOR','Dep Date','Ferry_Live'], as_index=False)['Seats_Booked'].sum()
