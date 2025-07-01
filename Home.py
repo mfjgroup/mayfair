@@ -83,9 +83,8 @@ else:
         }
      </style>
      """, unsafe_allow_html=True)
-        col1=st.columns(1)
-        with col1: 
-          st.markdown(f"""
+
+        st.markdown(f"""
                 <div class="metric-card">
                   <div class="metric-label">Inventory Summary</div>
                 </div>
