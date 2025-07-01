@@ -752,59 +752,59 @@ else:
             <div class="metric-value">{net_revenue_t:,.0f}€</div>
         </div>
     """, unsafe_allow_html=True)
-with col2:
-      st.markdown(f"""
+       with col2:
+        st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">💺Total Seats</div>
             <div class="metric-value">{seats_book_t:,.0f}</div>
         </div>
     """, unsafe_allow_html=True)
 
-      st.markdown("")
-      st.markdown("") 
-      seats_book_c=filtered_data.groupby(['CONTRIBUTOR'], as_index=False)['SEATS_BOOKED'].sum()
-      net_revenue_c=filtered_data.groupby(['CONTRIBUTOR'], as_index=False)['NET_REVENUE'].sum()
-      c_merge=pd.merge(seats_book_c,net_revenue_c,on=['CONTRIBUTOR'],how='inner')
-      seats_book_t=filtered_data['SEATS_BOOKED'].sum()
-      net_revenue_t=filtered_data['NET_REVENUE'].sum()
-      st.markdown("")
-      col1,col2=st.columns(2)
-      def graph(c_merge):
-       fig = px.pie(c_merge, names="CONTRIBUTOR", values="NET_REVENUE", hole=0.5,title="Graph1")
-       fig.update_traces(text=c_merge["CONTRIBUTOR"], textposition="inside")
-       fig.update_layout(
+       st.markdown("")
+       st.markdown("") 
+       seats_book_c=filtered_data.groupby(['CONTRIBUTOR'], as_index=False)['SEATS_BOOKED'].sum()
+       net_revenue_c=filtered_data.groupby(['CONTRIBUTOR'], as_index=False)['NET_REVENUE'].sum()
+       c_merge=pd.merge(seats_book_c,net_revenue_c,on=['CONTRIBUTOR'],how='inner')
+       seats_book_t=filtered_data['SEATS_BOOKED'].sum()
+       net_revenue_t=filtered_data['NET_REVENUE'].sum()
+       st.markdown("")
+       col1,col2=st.columns(2)
+       def graph(c_merge):
+        fig = px.pie(c_merge, names="CONTRIBUTOR", values="NET_REVENUE", hole=0.5,title="Graph1")
+        fig.update_traces(text=c_merge["CONTRIBUTOR"], textposition="inside")
+        fig.update_layout(
         width=400,  # Set the width of the chart (adjust as necessary)
         height=250,  # Set the height of the chart (adjust as necessary)
         title_font_size=16,
         title_y=0.95,  # Adjust the title font size
         margin=dict(t=10, b=10, l=10, r=10)  # Reduce margins
     )
-       st.plotly_chart(fig, use_container_width=True)
-      st.write("Revenue Percentage Per Contributor")
+        st.plotly_chart(fig, use_container_width=True)
+       st.write("Revenue Percentage Per Contributor")
     # Add the first graph (Pie chart)
-      with col1:
-       if not filtered_data.empty:
-        graph(c_merge)
+       with col1:
+        if not filtered_data.empty:
+         graph(c_merge)
 
     # Add the second graph (Total Revenue over time)
-      result = filtered_data.groupby(by=filtered_data["SECTOR"])["NET_REVENUE"].sum().reset_index()
-      fig1 = px.line(result, x="SECTOR", y="NET_REVENUE", title="Graph2", template="gridon")
-      fig1.update_layout(
+       result = filtered_data.groupby(by=filtered_data["SECTOR"])["NET_REVENUE"].sum().reset_index()
+       fig1 = px.line(result, x="SECTOR", y="NET_REVENUE", title="Graph2", template="gridon")
+       fig1.update_layout(
         width=400,  # Set the width of the chart (adjust as necessary)
         height=250,  # Set the height of the chart (adjust as necessary)
         title_font_size=16,
         title_y=0.95,  # Adjust the title font size
         margin=dict(t=8, b=8, l=8, r=8)  # Reduce margins
     )
-      with col2:
-       st.plotly_chart(fig1, use_container_width=True)
-       st.write("Total Revenue Per Sector")
+       with col2:
+        st.plotly_chart(fig1, use_container_width=True)
+        st.write("Total Revenue Per Sector")
  
-      result1 = filtered_data.groupby(by=filtered_data["FLT_NO"])[["NET_REVENUE", "SEATS_BOOKED"]].sum().reset_index()    
-      fig3 = go.Figure()
-      fig3.add_trace(go.Bar(x=result1["FLT_NO"], y=result1["NET_REVENUE"], name="Total Revenue"))
-      fig3.add_trace(go.Scatter(x=result1["FLT_NO"], y=result1["SEATS_BOOKED"], mode="lines", name="Total Seats", yaxis="y2"))
-      fig3.update_layout(
+        result1 = filtered_data.groupby(by=filtered_data["FLT_NO"])[["NET_REVENUE", "SEATS_BOOKED"]].sum().reset_index()    
+        fig3 = go.Figure()
+        fig3.add_trace(go.Bar(x=result1["FLT_NO"], y=result1["NET_REVENUE"], name="Total Revenue"))
+        fig3.add_trace(go.Scatter(x=result1["FLT_NO"], y=result1["SEATS_BOOKED"], mode="lines", name="Total Seats", yaxis="y2"))
+        fig3.update_layout(
         title="",
         xaxis=dict(
         title="Flight No",
@@ -826,10 +826,10 @@ with col2:
         legend=dict(x=1, y=1)
     )
     
-      st.plotly_chart(fig3, use_container_width=True)
-      st.dataframe(style_table_summer1(s_merge))
+       st.plotly_chart(fig3, use_container_width=True)
+       st.dataframe(style_table_summer1(s_merge))
 ######33
-      st.markdown(""" 
+       st.markdown(""" 
      <style>
         .stSelectbox {
             background-color: #f0f8ff;  /* Set background color for dropdowns */
@@ -839,7 +839,7 @@ with col2:
         }
     </style>
 """, unsafe_allow_html=True)
-      st.markdown(
+       st.markdown(
      """
     <style>
   span[data-baseweb="tag"] {
@@ -850,7 +850,7 @@ with col2:
     unsafe_allow_html=True,
 )
 #############
-      st.markdown("""
+       st.markdown("""
     <style>
     /* Change column width */
     .stDataFrame table th, .stDataFrame table td {
@@ -863,7 +863,7 @@ with col2:
     }
     </style>
 """, unsafe_allow_html=True)
-      st.markdown("""
+       st.markdown("""
     <style>
         /* Adjust the width and height of the selectbox */
         .stSelectbox, .stMultiSelect {
@@ -872,7 +872,7 @@ with col2:
         }
         </style>
 """, unsafe_allow_html=True)
-      st.markdown("""
+       st.markdown("""
     <style>
         /* Adjust the width and height of the selectbox */
         .stSelectbox {
