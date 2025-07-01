@@ -73,19 +73,25 @@ else:
     sheets= st.radio("Select Sheet",["Inventory","Transaction"])  
     if sheets=='Inventory':
         html_title = """
-    <style>
-        .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
-        .container {
-            text-align: center;
-            background-color: #800080;
-            color: white;
-            padding: 5px;
-            border-radius: 20px;
-        }
-    </style>
-     <div class="container"
-     <center><h1 class="title-test">🛩 Inventory Summary. </h1></center>
-     </div>
+<style>
+    .title-test {
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 18px;  /* Reduced font size */
+        padding: 5px;
+        border-radius: 6px;
+    }
+    .container {
+        text-align: center;
+        background-color: #800080;
+        color: white;
+        padding: 5px;
+        border-radius: 20px;
+    }
+</style>
+<div class="container">
+    <h3 class="title-test">🛩 Inventory Summary.</h3>
+</div>
 """
         st.markdown(html_title, unsafe_allow_html=True)
 
