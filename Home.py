@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import plotly.express as px
+#from streamlit_extras.dataframe_explorer import dataframe_explorer  # Optional, for exploring data
+import plotly.graph_objects as go
 
 # Streamlit config
 st.set_page_config(
@@ -64,6 +67,9 @@ else:
     </div>
     """
     st.markdown(html_title, unsafe_allow_html=True)
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
     sheets= st.radio("Select Sheet",["Inventory","Transaction"])  
     if sheets=='Inventory':
         html_title = """
