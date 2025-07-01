@@ -72,29 +72,24 @@ else:
     st.markdown("")
     sheets= st.radio("Select Sheet",["Inventory","Transaction"])  
     if sheets=='Inventory':
-        html_title = """
-<style>
-    .title-test {
-        color: #FFFFFF;
-        font-weight: bold;
-        font-size: 18px;  /* Reduced font size */
-        padding: 5px;
-        border-radius: 6px;
-    }
-    .container {
-        text-align: center;
-        background-color: #800080;
-        color: white;
-        padding: 5px;
-        border-radius: 20px;
-    }
-</style>
-<div class="container">
-    <h3 class="title-test">🛩 Inventory Summary.</h3>
-</div>
-"""
-        st.markdown(html_title, unsafe_allow_html=True)
-
+        st.markdown("""
+    <style>
+        .metric-card {
+            background-color: #008080;  
+            padding: 5% 5% 5% 5%;
+            display: inline-block;
+            #border: 3px solid #FF7F50;
+            width: 50%;
+        }
+     </style>
+     """, unsafe_allow_html=True)
+        col1=st.columns(1)
+        with col1: 
+          st.markdown(f"""
+                <div class="metric-card">
+                  <div class="metric-label">Inventory Summary</div>
+                </div>
+                  """,unsafe_allow_html=True)
         df = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Rotation Weeks')
         st.markdown("""
      <style>

@@ -14,6 +14,12 @@ if 'logged_in' not in st.session_state or not st.session_state.logged_in:
 # Set up Streamlit page configuration
 #st.set_page_config(page_title='Revenue Management System', page_icon="✈", layout="wide", initial_sidebar_state="expanded")
 
+
+
+
+
+
+
 html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
