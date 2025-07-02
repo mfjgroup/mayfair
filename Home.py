@@ -887,7 +887,7 @@ else:
         }
     </style>
 """, unsafe_allow_html=True)
-    if sheets=='Inventory':
+    if sheets=='Revenue':
        html_title = """
     <style>
         .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
@@ -1004,10 +1004,10 @@ else:
 
 ####################
        dfn = pd.read_excel('020525_RMS_Raw_Data2.xlsx', sheet_name='Flight Plan Budget')
-       dfn['Start Date'] = dfn['START'].dt.strftime('%d %b %Y')
-       dfn['End Date'] = dfn['END'].dt.strftime('%d %b %Y')
+       #dfn['Start Date'] = dfn['START'].dt.strftime('%d %b %Y')
+       #dfn['End Date'] = dfn['END'].dt.strftime('%d %b %Y')
 
-       start_end_char_cost = dfn.groupby(['SCHED_ID', 'Start Date', 'End Date', 'ROUTING'], as_index=False)['Net Cost'].sum()
+       start_end_char_cost = dfn.groupby(['SCHED_ID', 'START', 'END', 'ROUTING'], as_index=False)['Net Cost'].sum()
        tax_dfn = filtered_data.groupby(['SCHED_ID'], as_index=False)["Total Taxes"].sum()
        NET_REVENUE = df.groupby(['SCHED_ID'], as_index=False)["NET_REVENUE"].sum()
        agg_data1 = pd.merge(start_end_char_cost, tax_dfn, on=['SCHED_ID'], how='inner')
