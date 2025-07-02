@@ -1326,7 +1326,7 @@ else:
         title_font_size=16,  # Adjust the title font size
         margin=dict(t=30, b=30, l=30, r=30)  # Reduce margins
     )
-       st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
        with col1:
          if not df.empty:
           graph(df)
