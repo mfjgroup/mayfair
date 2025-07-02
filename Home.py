@@ -888,22 +888,25 @@ else:
     </style>
 """, unsafe_allow_html=True)
     if sheets=='Revenue':
-       html_title = """
+       col1,col2,col3,col4=st.columns(4)
+       with col1:
+         st.markdown("""
     <style>
-        .title-test{ color:#FFFFFF; font-weight:bold; padding:5px; border-radius:6px }
-        .container {
-            text-align: center;
-            background-color: #800080;
-            color: white;
-            padding: 5px;
-            border-radius: 20px;
+        .metric-card {
+            background-color: #000080;  
+            padding: 5% 5% 5% 5%;
+            display: inline-block;
+            #border: 3px solid #FF7F50;
+            width: 50%;
         }
-    </style>
-     <div class="container"
-     <center><h1 class="title-test">🛩 Revenue Summary  📊 </h1></center>
-     </div>
-"""
-       st.markdown(html_title, unsafe_allow_html=True)
+     </style>
+     """, unsafe_allow_html=True)
+
+         st.markdown(f"""
+                <div class="metric-card">
+                  <div class="metric-label">Revenue Summary</div>
+                </div>
+                  """,unsafe_allow_html=True)
 
        st.markdown(
     """
