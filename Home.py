@@ -888,7 +888,7 @@ else:
     </style>
 """, unsafe_allow_html=True)
     # Logout button
-if st.button("🔓 Logout"):
+    if st.button("🔓 Logout"):
         st.session_state.logged_in = False
         st.session_state.username = ''
         st.rerun()
