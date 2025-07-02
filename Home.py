@@ -1290,84 +1290,13 @@ else:
         }
      </style>
      """, unsafe_allow_html=True)
-    with col1:
+       with col1:
       #st.metric(label="Total Revenue", value=f"{total_rev:,.0f}€", delta="💶")
       #st.metric(label="Total Seats Booked", value=f"{total_sts:,.0f}", delta="💺")
-      st.markdown(f"""
+        st.markdown(f"""
         <div class="metric-cardr">
             <div class="metric-labelr">Total Net Revenue</div>
             <div class="metric-valuer">{total_rev:,.0f}€</div>
-            <div class="metric-labelr">💶</div>
-        </div>
-    """, unsafe_allow_html=True)
-      st.markdown("")
-      st.markdown(f"""
-        <div class="metric-cardr">
-            <div class="metric-labelr">Total Seats</div>
-            <div class="metric-valuer">{total_sts:,.0f}€</div>
-            <div class="metric-labelr">💺</div>
-        </div>
-    """, unsafe_allow_html=True)
-      net_revenue=df.groupby("SCHED_ID")["NET_REVENUE"].sum()
-      total_seats=df.groupby("SCHED_ID")["Seats_Booked"].sum()
-      merge_rev_s=pd.merge(net_revenue,total_seats,on=['SCHED_ID'],how='inner')
-    with col2:
-       st.dataframe(merge_rev_s)
-    st.subheader("Revenue & Seats per Sched")
-    st.markdown("")
- ##########33
-    col1,col2=st.columns(2)
-
-    def graph(filtered_data):
-       fig = px.pie(filtered_data, names="SCHED_ID", values="Seats_Booked", title="Seats")
-       fig.update_layout(
-        width=300,  # Set the width of the chart (adjust as necessary)
-        height=200,  # Set the height of the chart (adjust as necessary)
-        title_font_size=16,  # Adjust the title font size
-        margin=dict(t=30, b=30, l=30, r=30)  # Reduce margins
-    )
-       st.plotly_chart(fig, use_container_width=True)
-    with col1:
-       if not df.empty:
-        graph(df)
-    def graph(filtered_data):
-       fig = px.pie(filtered_data, names="SCHED_ID", values="NET_REVENUE", title="Revenue")
-       fig.update_layout(
-        width=300,  # Set the width of the chart (adjust as necessary)
-        height=200,  # Set the height of the chart (adjust as necessary)
-        title_font_size=16,  # Adjust the title font size
-        margin=dict(t=30, b=30, l=30, r=30)  # Reduce margins
-      )
-       st.plotly_chart(fig, use_container_width=True)
-    with col2:
-       if not df.empty:
-        graph(df)
-    result = df.groupby(by=df["SCHED_ID"])["NET_REVENUE"].sum().reset_index()
-    fig1 = px.line(result, x="SCHED_ID", y="NET_REVENUE", title="", template="gridon")
-    st.plotly_chart(fig1, use_container_width=True)
-    st.markdown("")
-###########3REVENUE BY CONTRIBUTOR
-# Apply the custom label style
-#elif page=="Rev & Seats Per Contributor":
-    st.markdown("")
-###############
-    df4=pd.read_excel('020525_RMS_Raw_Data2.xlsx',sheet_name='Booking_Data')
-    st.markdown('<span class="label-custom">Revenue Per Contributor:</span>', unsafe_allow_html=True)
-    st.markdown("")
-    cont_rev=df4.groupby("CONTRIBUTOR")["NET_REVENUE"].sum()
-    cont_seat=df4.groupby("CONTRIBUTOR")["SEATS_BOOKED"].sum()
-    merge_cont=pd.merge(cont_rev,cont_seat,on=('CONTRIBUTOR'),how='inner')
-##total reve & seats
-    t_con_rev=df4["NET_REVENUE"].sum()
-    t_con_seats=df4["SEATS_BOOKED"].sum()
-    col1,col2=st.columns(2)
-    with col1:
-       st.dataframe(merge_cont)
-    with col2:
-        st.markdown(f"""
-        <div class="metric-cardr">
-            <div class="metric-labelr">Total Revenue</div>
-            <div class="metric-valuer">{t_con_rev:,.0f}€</div>
             <div class="metric-labelr">💶</div>
         </div>
     """, unsafe_allow_html=True)
@@ -1375,14 +1304,85 @@ else:
         st.markdown(f"""
         <div class="metric-cardr">
             <div class="metric-labelr">Total Seats</div>
+            <div class="metric-valuer">{total_sts:,.0f}€</div>
+            <div class="metric-labelr">💺</div>
+        </div>
+    """, unsafe_allow_html=True)
+        net_revenue=df.groupby("SCHED_ID")["NET_REVENUE"].sum()
+        total_seats=df.groupby("SCHED_ID")["Seats_Booked"].sum()
+        merge_rev_s=pd.merge(net_revenue,total_seats,on=['SCHED_ID'],how='inner')
+        with col2:
+         st.dataframe(merge_rev_s)
+        st.subheader("Revenue & Seats per Sched")
+        st.markdown("")
+ ##########33
+        col1,col2=st.columns(2)
+
+       def graph(filtered_data):
+        fig = px.pie(filtered_data, names="SCHED_ID", values="Seats_Booked", title="Seats")
+        fig.update_layout(
+        width=300,  # Set the width of the chart (adjust as necessary)
+        height=200,  # Set the height of the chart (adjust as necessary)
+        title_font_size=16,  # Adjust the title font size
+        margin=dict(t=30, b=30, l=30, r=30)  # Reduce margins
+    )
+       st.plotly_chart(fig, use_container_width=True)
+       with col1:
+         if not df.empty:
+          graph(df)
+       def graph(filtered_data):
+        fig = px.pie(filtered_data, names="SCHED_ID", values="NET_REVENUE", title="Revenue")
+        fig.update_layout(
+        width=300,  # Set the width of the chart (adjust as necessary)
+        height=200,  # Set the height of the chart (adjust as necessary)
+        title_font_size=16,  # Adjust the title font size
+        margin=dict(t=30, b=30, l=30, r=30)  # Reduce margins
+      )
+        st.plotly_chart(fig, use_container_width=True)
+       with col2:
+        if not df.empty:
+         graph(df)
+       result = df.groupby(by=df["SCHED_ID"])["NET_REVENUE"].sum().reset_index()
+       fig1 = px.line(result, x="SCHED_ID", y="NET_REVENUE", title="", template="gridon")
+       st.plotly_chart(fig1, use_container_width=True)
+       st.markdown("")
+###########3REVENUE BY CONTRIBUTOR
+# Apply the custom label style
+#elif page=="Rev & Seats Per Contributor":
+       st.markdown("")
+###############
+       df4=pd.read_excel('020525_RMS_Raw_Data2.xlsx',sheet_name='Booking_Data')
+       st.markdown('<span class="label-custom">Revenue Per Contributor:</span>', unsafe_allow_html=True)
+       st.markdown("")
+       cont_rev=df4.groupby("CONTRIBUTOR")["NET_REVENUE"].sum()
+       cont_seat=df4.groupby("CONTRIBUTOR")["SEATS_BOOKED"].sum()
+       merge_cont=pd.merge(cont_rev,cont_seat,on=('CONTRIBUTOR'),how='inner')
+##total reve & seats
+       t_con_rev=df4["NET_REVENUE"].sum()
+       t_con_seats=df4["SEATS_BOOKED"].sum()
+       col1,col2=st.columns(2)
+       with col1:
+        st.dataframe(merge_cont)
+       with col2:
+         st.markdown(f"""
+        <div class="metric-cardr">
+            <div class="metric-labelr">Total Revenue</div>
+            <div class="metric-valuer">{t_con_rev:,.0f}€</div>
+            <div class="metric-labelr">💶</div>
+        </div>
+    """, unsafe_allow_html=True)
+         st.markdown("")
+         st.markdown(f"""
+        <div class="metric-cardr">
+            <div class="metric-labelr">Total Seats</div>
             <div class="metric-valuer">{t_con_seats:,.0f}€</div>
             <div class="metric-labelr">💺</div>
         </div>""", unsafe_allow_html=True)
 
-    result1 = df4.groupby(by=df4["CONTRIBUTOR"])[["NET_REVENUE"]].sum().reset_index()
-    result1_sorted=result1.sort_values(by="NET_REVENUE",ascending=False)
-    fig3 = go.Figure()
-    fig3.add_trace(go.Bar(x=result1_sorted["CONTRIBUTOR"],
+       result1 = df4.groupby(by=df4["CONTRIBUTOR"])[["NET_REVENUE"]].sum().reset_index()
+       result1_sorted=result1.sort_values(by="NET_REVENUE",ascending=False)
+       fig3 = go.Figure()
+       fig3.add_trace(go.Bar(x=result1_sorted["CONTRIBUTOR"],
                        y=result1_sorted["NET_REVENUE"], 
                        textposition='auto',
                        textfont=dict(
@@ -1393,8 +1393,8 @@ else:
     ),
                        name="Total Revenue"))
     
-    fig3.update_layout(
-        title="",
+       fig3.update_layout(
+         title="",
         #xaxis=dict(title="Contributor"),
         xaxis=dict(
         title="Contributor",
@@ -1418,10 +1418,10 @@ else:
     )
     )
     
-    st.plotly_chart(fig3, use_container_width=True)
+       st.plotly_chart(fig3, use_container_width=True)
 
     #%%%%%%%%%%%
-    st.markdown("""
+       st.markdown("""
     <style>
         .stSidebar {
             background-color: #E6E6FA;
@@ -1429,7 +1429,7 @@ else:
         }
     </style>
 """, unsafe_allow_html=True)
-    st.markdown("""
+       st.markdown("""
     <style>
         .stSelectbox {
             background-color: #f0f8ff;  /* Set background color for dropdowns */
@@ -1439,7 +1439,7 @@ else:
         }
     </style>
 """, unsafe_allow_html=True)
-    st.markdown("""
+       st.markdown("""
     <style>
         /* Adjust the width and height of the selectbox */
          .stMultiSelect {
@@ -1453,7 +1453,7 @@ else:
 
 
 # Custom CSS for radio buttons
-    st.markdown("""
+       st.markdown("""
     <style>
           .stRadio>label {
             color: #FF0000;  /* Change text color of the radio button */
@@ -1464,7 +1464,7 @@ else:
     </style>
 """, unsafe_allow_html=True)
 ##############
-    st.markdown("""
+       st.markdown("""
     <style>
         /* Adjust the width and height of the selectbox */
         .stSelectbox {
