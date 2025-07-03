@@ -15,7 +15,7 @@ st.set_page_config(
 
 # Sample users dictionary (replace with a secure auth in production)
 users = {
-    "mayfairjets": "mayfairjets@123456",
+    "mayfairjets": "MFJ2025@rms",
 
 }
 
@@ -53,7 +53,7 @@ else:
     # LOGGED IN VIEW
     # ----------------------------
     st.success(f"✅ Welcome User, {st.session_state.username}!")
-    st.balloons()
+    #st.balloons()
 
     # Time display
     now = datetime.now()
