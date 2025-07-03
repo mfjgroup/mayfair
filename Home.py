@@ -31,7 +31,7 @@ if 'username' not in st.session_state:
 if not st.session_state.logged_in:
     col1, col2, col3 = st.columns([1, 2, 1])  # Centering the form
     with col2:
-        st.title("🔐 User Login")
+        st.title("🔐 MFJ User Login")
         st.subheader("Login to Your Account")
 
         with st.form("login_form"):

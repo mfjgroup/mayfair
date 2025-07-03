@@ -1,5 +1,8 @@
 ﻿Name,Username,Password,User Group,Latest Update,Access
-Rogelio Camacho,rcamacho,MFJRMSrc,Admin,25-Feb-25,"Read, Write, Edit, Delete"
-Laila Sfeef,lsfeef,MFJRMSls,Admin,25-Feb-25,"Read, Write, Edit, Delete"
-Abdul Basit,abasit,MFJRMSab,Admin,25-Feb-25,"Read, Write, Edit, Delete"
-Ailyn Marimon,amarimon,MFJRMSam,User,25-Feb-25,Read Only
+Test Account,mayfairjets,MFJ2025@rms,,3-Jul-25,Read
+Rogelio Camacho,rcamacho,MFJRMS@rc,Admin,25-Feb-25,"Read, Write, Edit, Delete"
+Laila Sfeef,lsfeef,MFJRMS@ls,Admin,25-Feb-25,"Read, Write, Edit, Delete"
+Abdul Basit,abasit,MFJRMS@ab,Admin,25-Feb-25,"Read, Write, Edit, Delete"
+Ailyn Marimon,amarimon,MFJRMS@am,User,25-Feb-25,Read
+Ahmed Elhawary,aelhawary,MFJRMS@ae,Management,,Read
+Mohamed Hamed,mhamed,MFJRMS@mh,Management,,Read
